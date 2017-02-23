@@ -1,14 +1,22 @@
-#!/usr/bin/python3
+#!/usr/bin/env python
 
+import argparse
 import random
 import string
 import sys
 
-def random_string(length):
+def random_string(length=10):
     chars = string.ascii_letters + string.digits + '!@$%^&*_|#'
     return ''.join([random.SystemRandom().choice(chars) 
                     for _ in range(length)])
     
 
 if __name__ == "__main__":
-    print(random_string(int(sys.argv[1])))
+    desc = ("Generate a random string using system random")
+    parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('chars', metavar='N', type=int, nargs='?',
+                        default=10,
+                        help="Number of characters - default 10")
+    args = parser.parse_args()
+
+    print(random_string(args.chars))
