@@ -1,0 +1,26 @@
+#!/usr/bin/env python
+
+from random import SystemRandom
+import argparse
+
+def whowin(s1, s2):
+    r = SystemRandom(sum([ord(n) for n in 'NCAA']))
+    seeds = sorted([s1, s2])
+
+    if r.random() < s1 / (s1 + s2):
+        return s2
+    else:
+        return s1
+
+if __name__ == "__main__":
+    desc = ("Pick a random winner from seeds s1 and s2 "
+            "weighted by the proportion of s1 to s2 "
+            "e.g. if s1 = 1 and s2 = 10 probability that "
+            "s1 wins is 10/11 and probability that s2 wins "
+            "is 1/11")
+
+    parser = argparse.ArgumentParser(description=desc)
+    parser.add_argument('seeds', metavar='s1 s2', type=float, nargs=2)
+    args = parser.parse_args()
+    print(whowin(args.seeds[0], args.seeds[1]))
+                        
