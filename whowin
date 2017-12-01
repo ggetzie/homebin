@@ -6,11 +6,11 @@ import argparse
 def whowin(s1, s2):
     r = SystemRandom(sum([ord(n) for n in 'NCAA']))
     seeds = sorted([s1, s2])
-
-    if r.random() < s1 / (s1 + s2):
-        return s2
+    
+    if r.random() < seeds[0] / sum(seeds):
+        return seeds[1]
     else:
-        return s1
+        return seeds[0]
 
 if __name__ == "__main__":
     desc = ("Pick a random winner from seeds s1 and s2 "
