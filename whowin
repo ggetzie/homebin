@@ -5,9 +5,10 @@ import argparse
 
 def whowin(s1, s2):
     r = SystemRandom(sum([ord(n) for n in 'NCAA']))
-    seeds = sorted([s1, s2])
+    seeds = sorted([(s1, 'first arg'), (s2, 'second arg')],
+                   key=lambda x: x[0])
     
-    if r.random() < seeds[0] / sum(seeds):
+    if r.random() < seeds[0][0] / sum([x[0] for x in seeds]):
         return seeds[1]
     else:
         return seeds[0]
