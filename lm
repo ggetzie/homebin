@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+# less the most recently modified file in a directory
+# mainly for test emails saved to a file
+
+EMDIR=${1:-/tmp/aeq_emails}
+
+EMFILE=`ls -tB -1 $EMDIR | head -n 1`
+
+less $EMDIR/$EMFILE
