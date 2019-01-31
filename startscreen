@@ -1,0 +1,4 @@
+#!/bin/bash
+
+sudo mkdir /var/run/screen
+sudo chmod 777 /var/run/screen
