@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 PROJECT_ABBR=$1
 ENV_DIR=$2
 

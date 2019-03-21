@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+mkdir logs
+touch logs/debug.log
+touch logs/nginx-access.log
+touch logs/nginx-error.log
+touch logs/gunicorn_supervisor.log
