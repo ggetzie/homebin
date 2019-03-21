@@ -1,0 +1,15 @@
+#! /usr/bin/env/ bash
+# run with sudo
+PROJECT=$1
+STATE=$2 # local or production
+SLUG=$3 # project slug
+
+
+ln -s /usr/local/src/${PROJECT}/srv/${STATE}/nginx_${PROJECT}.conf /etc/nginx/sites-enabled/${PROJECT}
+ln -s /usr/local/src/${PROJECT}/srv/${STATE}/super_${PROJECT}.conf /etc/supervisor/conf.d/super_${PROJECT}.conf
+
+service nginx reload
+supervisorctl reread
+supervisorctl update
+echo 'alias re${SLUG}="sudo supervisorctl restart ${PROJECT}"' >> ~/.bashrc
+source ~/.bashrc
