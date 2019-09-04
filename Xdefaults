@@ -1,0 +1,5 @@
+XTerm*metaSendsEscape: true
+Emacs.Font: a14
+XTerm*reverseVideo: on
+Xterm*VT100.geometry: 110x50
+XTerm*eightBitInput: false
