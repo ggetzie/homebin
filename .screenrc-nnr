@@ -1,0 +1,17 @@
+escape ^Zz
+bindkey -k k9 next
+bindkey -k k8 prev
+chdir /usr/local/src/nnr
+screen -t nnr
+split -v
+focus next
+screen -t logs
+chdir /home/gabe/aws
+screen -t nnr1ssh
+chdir /usr/local/src/kotsf-blog
+screen -t kotsf-blog
+chdir /usr/local/src/kotsf-posts
+screen -t kotsf-posts
+select 1
+exec !...| tail -f /usr/local/src/nnr/logs/debug.log
+focus prev
