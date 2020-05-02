@@ -11,5 +11,5 @@ sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/super_${PROJECT}.conf /etc/sup
 sudo service nginx reload
 sudo supervisorctl reread
 sudo supervisorctl update
-echo 'alias re${SLUG}="sudo supervisorctl restart ${PROJECT}"' >> ~/.bashrc
+echo -e 'alias re${SLUG}="sudo supervisorctl restart ${PROJECT}"' >> ~/.bashrc
 source ~/.bashrc

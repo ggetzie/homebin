@@ -2,12 +2,13 @@
 
 PROJECT_ABBR=$1
 ENV_DIR=$2
+STATE=$3 # local or production
 
 SECRET_KEY=`keygen 50`
 DB_PW=`keygen 15`
 
 ENV_ACTIVATE="/usr/local/src/env/${ENV_DIR}/bin/activate"
 
-echo -e "\nexport DJANGO_SETTINGS_MODULE='config.settings.local'" >> $ENV_ACTIVATE
+echo -e "\nexport DJANGO_SETTINGS_MODULE='config.settings.${STATE}'" >> $ENV_ACTIVATE
 echo -e "export ${PROJECT_ABBR}_DB_PW='${DB_PW}'" >> $ENV_ACTIVATE
 echo -e "export ${PROJECT_ABBR}_SECRET_KEY='${SECRET_KEY}'" >> $ENV_ACTIVATE
