@@ -7,9 +7,10 @@ split -v
 focus next
 screen -t logs
 chdir /home/gabe/aws
-screen -t nnr1ssh
+screen -t ssh
 chdir /usr/local/src/kotsf-blog
 screen -t kotsf-blog
+screen -t kotsf-develop
 chdir /usr/local/src/kotsf-posts
 screen -t kotsf-posts
 select 1
