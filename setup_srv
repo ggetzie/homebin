@@ -39,24 +39,30 @@ if __name__ == "__main__":
     parser.add_argument('user', help="OS user for project")
     args = parser.parse_args()
     port = get_port(8001, 9000)
-    context = {"PROJECT_SLUG": args["slug"],
-               "PROJECT_USER": args["user"],
+    context = {"PROJECT_SLUG": args.slug,
+               "PROJECT_USER": args.user,
                "PROJECT_PORT": str(port)}
     templates = pathlib.Path("/home/gabe/bin/templates")
-    dest = pathlib.Path(f"/usr/local/src/{args['PROJECT_SLUG']}/srv/local")
-    dest.mkdir(exist_ok=True)
-    gunicorn_start = populate(open(templates / "gunicorn_start.bash").read(),
-                              context)
-    nginx = populate(open(templates / "nginx_PROJECT_SLUG.conf"),
-                     context)
-    supervisor = populate(open(templates / "super_PROJECT_SLUG.conf").read(),
-                          context)
+    dest = pathlib.Path(f"/usr/local/src/{args.slug}/srv/local")
+    dest.mkdir(exist_ok=True, parents=True)
+    with open(templates / "gunicorn_start.bash") as gunicorn_file:
+        gunicorn_text = gunicorn_file.read()
+        gunicorn_start = populate(gunicorn_text, context)
+    
+    with open(templates / "nginx_PROJECT_SLUG.conf") as nginx_file:
+        nginx_text = nginx_file.read()
+        nginx = populate(nginx_text, context)
+
+    with open(templates / "super_PROJECT_SLUG.conf") as super_file:
+        super_text = super_file.read()
+        supervisor = populate(super_text, context)
+
     with open(dest / "gunicorn_start.bash", "w") as gunicorn_out:
         gunicorn_out.write(gunicorn_start)
     
-    with open(dest / f"nginx_{args['PROJECT_SLUG']}.conf", "w") as nginx_out:
+    with open(dest / f"nginx_{args.slug}.conf", "w") as nginx_out:
         nginx_out.write(nginx)
 
-    with open(dest / f"super_{args['PROJECT_SLUG']}", "w") as super_out:
+    with open(dest / f"super_{args.slug}.conf", "w") as super_out:
         super_out.write(supervisor)
     
