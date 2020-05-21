@@ -1,0 +1,12 @@
+escape ^Zz
+bindkey -k k9 next
+bindkey -k k8 prev
+chdir /usr/local/src/bfm
+screen -t bfm
+split -v
+focus next
+screen -t logs
+screen -t ssh
+select 1
+exec !...| tail -f /usr/local/src/bfm/logs/debug.log
+focus prev
