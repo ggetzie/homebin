@@ -1,0 +1,15 @@
+#! /usr/bin/env bash
+
+DB_USER=${1:?"You must supply the username for the new database user"}
+DB_NAME=${2:?"You must supply the name for the new database"}
+DB_PW=${3:?"You must supply the password for the new user (use environment variable)"}
+
+echo "About to create new database ${DB_NAME} owned by user ${DB_USER} with password ${DB_PW}"
+read -p 'Proceed? Y[N]: ' CONFIRM
+if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]
+then
+    psql postgres -c "CREATE ROLE ${DB_USER} WITH LOGIN PASSWORD '${DB_PW}';"
+    psql postgres -c "CREATE DATABASE ${DB_NAME} OWNER ${DB_USER};"
+else
+    echo "Never mind then."
+fi

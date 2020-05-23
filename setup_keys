@@ -1,8 +1,8 @@
 #! /usr/bin/env bash
 
-PROJECT_ABBR=$1
-ENV_DIR=$2
-STATE=$3 # local or production
+PROJECT_ABBR=${1:?"You must supply the project abbreviation"}
+ENV_DIR=${2:?"You must supply the name of the environment directory"}
+STATE=${3:?"You must supply the project state - local or production"}
 
 SECRET_KEY=`keygen 50`
 DB_PW=`keygen 15`

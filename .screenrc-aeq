@@ -1,0 +1,11 @@
+escape ^Zz
+bindkey -k k9 next
+bindkey -k k8 prev
+chdir /usr/local/src/aeqcms
+screen -t aeq
+split -v
+focus next
+screen -t logs
+chdir /home/gabe/aws
+screen -t ssh
+focus prev

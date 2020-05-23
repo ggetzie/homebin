@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+
+username=${1:?"Please supply a username"}
+
+# create the webapps group if it doesn't exist
+[ $(getent group webapps) ] || sudo groupadd webapps
+
+sudo useradd --system --gid webapps --shell /bin/bash --home /home/$username $username
