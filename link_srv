@@ -1,9 +1,7 @@
 #! /usr/bin/env bash
 
-PROJECT=$1
-STATE=$2 # local or production
-SLUG=$3 # project slug
-
+PROJECT=${1:?"Please supply the project folder name"}
+STATE=${2:?"Specify the project state - local or production"}
 
 sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/nginx_${PROJECT}.conf /etc/nginx/sites-enabled/${PROJECT}
 sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/super_${PROJECT}.conf /etc/supervisor/conf.d/super_${PROJECT}.conf
@@ -11,5 +9,5 @@ sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/super_${PROJECT}.conf /etc/sup
 sudo service nginx reload
 sudo supervisorctl reread
 sudo supervisorctl update
-echo -e 'alias re${SLUG}="sudo supervisorctl restart ${PROJECT}"' >> ~/.bashrc
+echo -e "alias re${PROJECT}=\"sudo supervisorctl restart ${PROJECT}\"" >> ~/.bashrc
 source ~/.bashrc
