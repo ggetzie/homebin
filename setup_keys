@@ -1,14 +1,35 @@
 #! /usr/bin/env bash
+WAGTAIL=0
 
-PROJECT_ABBR=${1:?"You must supply the project abbreviation"}
-ENV_DIR=${2:?"You must supply the name of the environment directory"}
-STATE=${3:?"You must supply the project state - local or production"}
+while :; do
+    case $1 in
+        -w|--wagtail)
+            WAGTAIL=1
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            break
+    esac
+done
+
+PROJECT_SLUG=${1:?"You must supply the project abbreviation"}
+STATE=${2:?"You must supply the project state - local/dev or production"}
 
 SECRET_KEY=`keygen 50`
 DB_PW=`keygen 15`
 
-ENV_ACTIVATE="/usr/local/src/env/${ENV_DIR}/bin/activate"
+ENV_ACTIVATE="/usr/local/src/env/${PROJECT_SLUG}/bin/activate"
 
-echo -e "\nexport DJANGO_SETTINGS_MODULE='config.settings.${STATE}'" >> $ENV_ACTIVATE
-echo -e "export ${PROJECT_ABBR}_DB_PW='${DB_PW}'" >> $ENV_ACTIVATE
-echo -e "export ${PROJECT_ABBR}_SECRET_KEY='${SECRET_KEY}'" >> $ENV_ACTIVATE
+if [ $WAGTAIL -eq 1 ]
+then
+    echo -e "\nexport DJANGO_SETTINGS_MODULE='${PROJECT_SLUG}.settings.${STATE}'" >> $ENV_ACTIVATE
+else
+    echo -e "\nexport DJANGO_SETTINGS_MODULE='config.settings.${STATE}'" >> $ENV_ACTIVATE
+fi
+echo -e "export ${PROJECT_SLUG}_DB_PW='${DB_PW}'" >> $ENV_ACTIVATE
+echo -e "export ${PROJECT_SLUG}_SECRET_KEY='${SECRET_KEY}'" >> $ENV_ACTIVATE
+echo -e "alias ${PROJECT_SLUG}env=\"source /usr/local/src/env/${PROJECT_SLUG}/bin/activate\"" >> ~/.bashrc
