@@ -1,0 +1,4 @@
+#! /usr/bin/env/ bash
+
+# extract environment variables from django config files
+grep -Eo 'env\(".+".*\)' $1 | grep -Eo '".+"' | sed 's/"//g' | awk '{print "export " $1 "=\"\"" }'

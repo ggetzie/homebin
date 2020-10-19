@@ -24,7 +24,7 @@ def get_port(start, end):
     Find the first open port between start and end
     """
     for port in range(start, end):
-        if port_is_open(port): return port
+        if not port_is_open(port): return port
     return None
 
 def populate(text, context):
@@ -38,16 +38,16 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=desc)
     parser.add_argument('slug', help="Project Slug")
     parser.add_argument('user', help="OS user for project")
-    parser.add_argument("--port", help="Return the lowest open port above 8001 and exit",
-                                  action="store_true")
+    parser.add_argument('port', help="Port for gunicorn")
+
     args = parser.parse_args()
-    port = get_port(8001, 9000)
-    if args.port:
-        print(f"Lowest open port is {port}")
-        sys.exit()
+    # port = get_port(8001, 9000)
+    # if args.port:
+    #     print(f"Lowest open port is {port}")
+    #     sys.exit()
     context = {"PROJECT_SLUG": args.slug,
                "PROJECT_USER": args.user,
-               "PROJECT_PORT": str(port)}
+               "PROJECT_PORT": args.port}
     templates = pathlib.Path("/home/gabe/bin/templates")
     dest = pathlib.Path(f"/usr/local/src/{args.slug}/srv/local")
     dest.mkdir(exist_ok=True, parents=True)
