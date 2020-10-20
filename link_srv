@@ -10,4 +10,4 @@ sudo service nginx reload
 sudo supervisorctl reread
 sudo supervisorctl update
 echo -e "alias re${PROJECT}=\"sudo supervisorctl restart ${PROJECT}\"" >> ~/.bashrc
-source ~/.bashrc
+
