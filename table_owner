@@ -1,0 +1,8 @@
+#! /usr/bin/env bash
+# assign all tables in database to new owner
+# arguments $1 db name, $2 new owner name
+
+for tbl in `psql -qAt -c "SELECT tablename FROM pg_tables WHERE schemaname = 'public';" $1`
+do
+    psql -c "alter table \"$tbl\" owner to $2" $1
+done
