@@ -3,8 +3,8 @@
 PROJECT=${1:?"Please supply the project folder name"}
 STATE=${2:?"Specify the project state - local or production"}
 
-sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/celery.service /etc/systemd/system/${PROJECT}_celery.service
-sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/celerybeat.service /etc/systemd/system/${PROJECT}_celerybeat.service
+sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/super_${PROJECT}_celery.conf /etc/supervisor/conf.d/super_${PROJECT}_celery.conf
+sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/super_${PROJECT}_celerybeat.conf /etc/supervisor/conf.d/super_${PROJECT}_celerybeat.conf
 
-sudo systemctl daemon-reload
-
+sudo supervisorctl reread
+sudo supervisorctl update
