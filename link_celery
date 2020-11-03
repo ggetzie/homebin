@@ -1,0 +1,10 @@
+#! /usr/bin/env bash
+
+PROJECT=${1:?"Please supply the project folder name"}
+STATE=${2:?"Specify the project state - local or production"}
+
+sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/celery.service /etc/systemd/system/${PROJECT}_celery.service
+sudo ln -s /usr/local/src/${PROJECT}/srv/${STATE}/celerybeat.service /etc/systemd/system/${PROJECT}_celerybeat.service
+
+sudo systemctl daemon-reload
+

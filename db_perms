@@ -1,0 +1,11 @@
+#! /usr/bin/env bash
+
+DB_USER=${1:?"You must supply the username for the new database user"}
+DB_NAME=${2:?"You must supply the name for the new database"}
+
+psql ${DB_NAME} -c "GRANT ALL ON ALL TABLES IN SCHEMA public to ${DB_USER};"
+psql ${DB_NAME} -c "GRANT ALL ON ALL SEQUENCES IN SCHEMA public to ${DB_USER};"
+psql ${DB_NAME} -c "GRANT ALL ON ALL FUNCTIONS IN SCHEMA public to ${DB_USER};"
+
+
+
