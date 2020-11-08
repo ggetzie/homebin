@@ -1,11 +1,13 @@
 escape ^Zz
 bindkey -k k9 next
 bindkey -k k8 prev
-chdir /usr/local/src/fvdw_backend
-screen -t fvdw
+chdir /usr/local/src/
+screen -t work
 screen -t db
-chdir "/media/gabe/Backup Plus"
-screen -t backup_plus
+chdir /home/gabe/credentials
+screen -t ssh
+chdir /usr/local/src
+screen -t logs
 hardstatus alwayslastline
 hardstatus string "%t"
 chdir /usr/local/src/

@@ -81,8 +81,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 export PYTHONPATH=${PYTHONPATH}:'/home/gabe/python':''
-PATH="$PATH:/home/gabe/android/android-sdk-linux/tools"
-JAVA_HOME="$JAVA_HOME:/usr/lib/jvm/java-7-openjdk-amd64/bin/"
+export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/bin/"
 
 alias ssh9="ssh -p 19999"
 alias backup="rsync -vaxEe 'ssh -p 19999' --delete --exclude='.cache' ~ '/media/gabe/My Book/backup/'"
@@ -102,18 +101,12 @@ alias proph="cd /usr/local/src/prophit_dev/prophit_main_repo"
 alias penv="source '/usr/local/src/env/prophit/local/bin/activate'"
 alias repro="sudo supervisorctl restart prophit_main celery"
 
-alias aeq="cd /usr/local/src/aeq"
-alias reaeq="sudo supervisorctl restart aeq"
-alias aeqenv="source /usr/local/src/env/aeqenv/bin/activate"
-
-
 alias dsenv="source ~/python/env/ds/bin/activate"
 alias ds3env="source ~/python/env/ds3/bin/activate"
 
 alias pcp="cd /usr/local/src/pcp/"
 alias repcp="sudo supervisorctl restart pcp"
 alias pcpenv="source /usr/local/src/env/postcard-prank/bin/activate"
-
 
 # N-Triples aliases from http://blog.datagraph.org/2010/03/grepping-ntriples
 alias rdf-count="awk '/^\s*[^#]/ { n += 1 } END { print n }'"
@@ -129,15 +122,21 @@ alias rdf-datatypes="awk -F'\x5E' '/\"\^\^</ { print substr(\$3, 2, length(\$3)-
 # disable touchpad
 # xinput --set-prop "SynPS/2 Synaptics TouchPad" "Device Enabled" 1
 
-export PATH="/usr/local/src/aeq/bin:/home/gabe/bin:$PATH"
-
+export PATH="/home/gabe/bin:/usr/lib/postgresql/12/bin:/home/gabe/android/android-sdk-linux/tools:/home/gabe/.local/bin:$PATH"
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 # added by Anaconda3 2.3.0 installer
-export PATH="/home/gabe/python/anaconda3/bin:$PATH"
+# export PATH="/home/gabe/python/anaconda3/bin:$PATH"
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-PYTHON_BUILD_MIRROR_URL="http://yyuu.github.io/pythons"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init -)"
+# PYTHON_BUILD_MIRROR_URL="http://yyuu.github.io/pythons"
+
+export ANDROID_HOME=$HOME/Android/Sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 alias lr="cd /usr/local/src/learn-react"
 alias cvenv="source /usr/local/src/env/ceevee/bin/activate"
@@ -146,8 +145,41 @@ alias mscv="cd /usr/local/src/ceevee"
 alias cf="cd /usr/local/src/learn-react/cashflo_0-1"
 alias mdulenv="source /usr/local/src/env/mdul/bin/activate"
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+alias screen-nnr="screen -S nnr -c /home/gabe/bin/.screenrc-nnr"
+alias screen-bfm="screen -S bfm -c /home/gabe/bin/.screenrc-bfm"
+alias screen-aeq="screen -S aeq -c /home/gabe/bin/.screenrc-aeq"
+alias screen-fvdw="screen -S fvdw -c /home/gabe/bin/screen/.screenrc-fvdw"
+alias screen-blog="screen -S blog -c /home/gabe/bin/screen/.screenrc-blog"
+alias screen-base="screen -S work -c /home/gabe/bin/screen/.screenrc-base"
+
 alias nnrenv="source /usr/local/src/env/nnr/bin/activate"
 alias nnr="cd /usr/local/src/nnr"
-alias nnr="cd /usr/local/src/nnr"
 alias rennr="sudo supervisorctl restart nnr"
+alias homenv="source /usr/local/src/env/home/bin/activate"
+alias nnrfwd="stripe listen --forward-to nnr/main/webhook/"
+alias recv="sudo supervisorctl restart ceevee"
+alias bfmenv="source /usr/local/src/env/J2020_0001/bin/activate"
+alias bfm="cd /usr/local/src/J2020_0001"
+alias py38="source /usr/local/src/env/py38/bin/activate"
+alias aeqcmsenv="source /usr/local/src/env/aeqcms/bin/activate"
+alias aeqcms="cd /usr/local/src/aeqcms"
+alias mscv2env="source /usr/local/src/env/mscv2/bin/activate"
+alias mscv2="cd /usr/local/src/mscv2"
+alias aeq="cd /usr/local/src/aeq"
+alias aeq2="cd /usr/local/src/aeq2"
+alias aeqenv="source /usr/local/src/env/aeq/bin/activate"
+alias reaeq="sudo supervisorctl restart aeq"
+alias J2020_0003env="source /usr/local/src/env/J2020_0003/bin/activate"
+alias cvengenv="source /usr/local/src/env/cveng/bin/activate"
+alias araienv="source /usr/local/src/env/arai/bin/activate"
+alias fvdw_backendenv="source /usr/local/src/env/fvdw_backend/bin/activate"
+alias kotsf_bizenv="source /usr/local/src/env/kotsf_biz/bin/activate"
+alias aslcv2_beenv="source /usr/local/src/env/aslcv2_be/bin/activate"
+alias caktus_tddenv="source /usr/local/src/env/caktus_tdd/bin/activate"
+alias exp_tastenv='source /usr/local/src/env/exp_taste/bin/activate'
+alias aslcv2="cd /home/gabe/Dropbox/kotsf/Projects/J2020_0007_PeterCobb/code/aslcv2"
+alias exp_tasteenv="source /usr/local/src/env/exp_taste/bin/activate"
+alias timekeeperenv="source /usr/local/src/env/timekeeper/bin/activate"
+alias eg_psatenv="source /usr/local/src/env/eg_psat/bin/activate"
+alias hkuvpn='/opt/cisco/anyconnect/bin/vpn connect vpn2fa.hku.hk'
+alias hkuvpnd="/opt/cisco/anyconnect/bin/vpn disconnect vpn2fa.hku.hk"

@@ -1,43 +1,46 @@
-;;(require 'cl)
+;;; package --- summary
+;;; Commentary:
+;;; Code:
 (defvar *emacs-load-start* (current-time))
 (setq custom-file "~/.emacs-custom.el")
 (load custom-file 'noerror)
 
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  ;; (add-to-list 'load-path "<path where use-package is installed>")
+  (require 'use-package))
+
+
 (add-to-list 'load-path "/home/gabe/emacs/")
-(add-to-list 'load-path "/home/gabe/emacs/yaml-mode")
-(add-to-list 'load-path "/home/gabe/emacs/typescript-mode")
+(add-to-list 'load-path "/home/gabe/emacs/yaml-mode/")
+(add-to-list 'load-path "/home/gabe/emacs/typescript-mode/")
 (add-to-list 'load-path "/home/gabe/emacs/markdown-mode/")
-(add-to-list 'load-path "/home/gabe/slime/")
-;; (add-to-list 'load-path "/usr/local/src/ucw-boxset/dep/slime")
-;; (add-to-list 'load-path "/usr/local/src/ucw-boxset/dep/slime/contrib")
-(add-to-list 'load-path "/home/gabe/emacs/pony-mode")
+
 (add-to-list 'load-path "/home/gabe/emacs/scss-mode")
-;; (add-to-list 'load-path "/home/gabe/emacs/auto-resize-emacs")
+
 
 (require 'package)
-(let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
-                    (not (gnutls-available-p))))
-       (url (concat (if no-ssl "http" "https") "://melpa.org/packages/")))
-  (add-to-list 'package-archives (cons "melpa" url) t))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/")))
-(package-initialize) 
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
+;; and `package-pinned-packages`. Most users will not need or want to do this.
+;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(package-initialize)
 
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
-(add-hook 'yaml-mode-hook
-      '(lambda ()
-	 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-(require 'typescript-mode)
-(add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+;; (require 'yaml-mode)
+;; (add-to-list 'auto-mode-alist '("\\.yml\\'" . yaml-mode))
+;; (add-hook 'yaml-mode-hook
+;;       '(lambda ()
+;; 	 (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
-;; (require 'pony-mode)
+;; (require 'typescript-mode)
+;; (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+
 ;; (require 'auto-resize)
 
 ;; (set-default-font "-*-fixed-medium-r-*-*-20-*-*-*-*-*-iso8859-*")
-(set-face-attribute 'default (selected-frame) :height 130)
+;; (set-face-attribute 'default (selected-frame) :height 102)
 
 (setq-default fill-column 80)
 (setq-default py-indent-offset 4)
@@ -45,7 +48,7 @@
 
 ;; turn off toolbar and menus
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;; (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
 (ansi-color-for-comint-mode-on)
 
@@ -55,24 +58,53 @@
 (global-set-key "\C-x\j" 'setnu-mode)
 
 ;; enable cut and paste to and from other programs
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
 ; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
 (global-set-key [(shift delete)] 'clipboard-kill-region)
 (global-set-key [(control insert)] 'clipboard-kill-ring-save)
 (global-set-key [(shift insert)] 'clipboard-yank)
 (global-set-key [f5] 'call-last-kbd-macro)
-;; (global-set-key [f12] 'slime-selector)
+
 
 ;; link some more modes to file extensions
 
 (add-to-list 'auto-mode-alist '("\\.asd\\'" . lisp-mode))
 
+;; configuration for React / jsx
+(add-to-list 'auto-mode-alist '("\\.jsx?$" . web-mode))
+(setq web-mode-content-types-alist '(("jsx" . "\\.js[x]?\\'")))
+
+(defun web-mode-init-hook ()
+  "Hooks for Web mode.  Adjust indent."
+  (setq web-mode-markup-indent-offset 4))
+  
+(add-hook 'web-mode-hook  'web-mode-init-hook)
+
+;; flycheck, linting for js
+(require 'flycheck)
+
+(setq-default flycheck-disabled-checkers
+              (append flycheck-disabled-checkers
+                      '(javascript-jshint json-jsonlist)))
+
+;; Enable eslint checker for web-mode
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+;; Enable flycheck globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
+(defun web-mode-init-prettier-hook ()
+  (add-node-modules-path)
+  (prettier-js-mode))
+
+(add-hook 'web-mode-hook  'web-mode-init-prettier-hook)
+
+(add-hook 'web-mode-hook  'emmet-mode)
+
 ;; javascript mode, set number mode
-(autoload 'javascript-mode "javascript" nil t)
-(add-to-list 'auto-mode-alist '("\\.js\\'" . rjsx-mode))
-(autoload 'setnu-mode "setnu" nil t)
-(autoload 'turn-on-setnu-mode "setnu" nil t)
-(add-hook 'javascript-mode-hook 'turn-on-setnu-mode)
+;; (autoload 'javascript-mode "javascript" nil t)
+;; (autoload 'setnu-mode "setnu" nil t)
+;; (autoload 'turn-on-setnu-mode "setnu" nil t)
+;; (add-hook 'javascript-mode-hook 'turn-on-setnu-mode)
 
 ;; markdown mode
 (autoload 'markdown-mode "markdown-mode.el"
@@ -90,30 +122,22 @@
 (autoload 'scss-mode "scss-mode.el" "Major mode for editing SCSS" t)
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
-;; configure slime mode
-;; (require 'slime)
-;; (autoload 'slime-selector "slime" t)
-;; (eval-after-load "slime"
-;;   '(progn
-;;     (setq inferior-lisp-program "sbcl"
-;;      lisp-indent-function 'common-lisp-indent-function
-;;      common-lisp-hyperspec-root "http://www.lispworks.com/documentation/HyperSpec/")
-
-;;     (slime-setup)
-;;     (define-key slime-mode-map "\M-o" 'slime-eval-buffer)
-;;     (define-key slime-mode-map "\C-x\q" 'slime-quit-lisp)
-;;     (define-key slime-repl-mode-map "\C-x\q" 'slime-quit-lisp)))
-
-;; (add-hook 'slime-load-hook (lambda () (require 'slime-fancy)))
-;; (add-hook 'lisp-mode-hook 'turn-on-setnu-mode)
-;; (add-hook 'inferior-lisp-mode-hook 'turn-on-setnu-mode)
-;; (add-hook 'lisp-mode-hook (lambda () (slime-mode t)))
-;; (add-hook 'inferior-lisp-mode-hook (lambda () (inferior-slime-mode t)))
-
+;; ord mode
 (require 'org)
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
 (setq org-log-done t)
+
+;; lsp mode
+;; (require 'lsp-mode)
+;; (add-hook 'prog-mode-hook #'lsp)
+
+;; (use-package lsp-jedi
+;;   :ensure t
+;;   :config
+;;   (with-eval-after-load "lsp-mode"
+;;     (add-to-list 'lsp-disabled-clients 'pyls)
+;;     (add-to-list 'lsp-enabled-clients 'jedi)))
 
 ;; load cycle buffer
 (autoload 'cycle-buffer "cycle-buffer" "Cycle forward." t)
@@ -121,10 +145,10 @@
 (autoload 'cycle-buffer-permissive "cycle-buffer" "Cycle forward allowing *buffers*." t)
 (autoload 'cycle-buffer-backward-permissive "cycle-buffer" "Cycle backward allowing *buffers*." t)
 (autoload 'cycle-buffer-toggle-interesting "cycle-buffer" "Toggle if this buffer will be considered." t)
-(global-set-key [(f9)]        'cycle-buffer-backward)
-(global-set-key [(f10)]       'cycle-buffer)
-(global-set-key [(shift f9)]  'cycle-buffer-backward-permissive)
-(global-set-key [(shift f10)] 'cycle-buffer-permissive)
+(global-set-key [(f8)]        'cycle-buffer-backward)
+(global-set-key [(f9)]       'cycle-buffer)
+(global-set-key [(shift f8)]  'cycle-buffer-backward-permissive)
+(global-set-key [(shift f9)] 'cycle-buffer-permissive)
 
 
 ;; load window number mode
@@ -163,19 +187,13 @@ the mode-line."
 ;; (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
 ;;                            (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
-(setenv "PYTHONPATH" "/home/gabe/python/:.")
-
-
-
+(setq dired-listing-switches "-alh")
 
 ;; start working!
 (split-window-horizontally)
-;; (dired "/usr/local/src/kotsf/")
-(dired "/usr/local/src/aeq/")
-(dired "/usr/local/src/aeq/aeq/templates/")
-(dired "/usr/local/src/aeq/aeq/static/")
-;; (dired "/usr/local/src/prophit_dev/prophit_main_repo/")
+(dired "/usr/local/src/kotsf-posts/")
 ;; (shell "pyserver")
 ;; (shell "pyshell")
 (balance-windows)
-
+(provide `.emacs)
+;;; .emacs ends here
