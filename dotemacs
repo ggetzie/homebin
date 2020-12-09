@@ -57,6 +57,9 @@
 (global-set-key "\C-x\C-a" 'beginning-of-line-text)
 (global-set-key "\C-x\j" 'setnu-mode)
 
+;; (global-set-key "\M-1" 'other-window)
+;; (global-set-key "\M-2" 'other-window)
+
 ;; enable cut and paste to and from other programs
 (setq select-enable-clipboard t)
 ; (setq interprogram-paste-function 'x-cut-buffer-or-selection-value)
@@ -90,7 +93,7 @@
 ;; Enable eslint checker for web-mode
 (flycheck-add-mode 'javascript-eslint 'web-mode)
 ;; Enable flycheck globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;; (add-hook 'after-init-hook #'global-flycheck-mode)
 
 (defun web-mode-init-prettier-hook ()
   (add-node-modules-path)
@@ -151,6 +154,7 @@
 (global-set-key [(shift f9)] 'cycle-buffer-permissive)
 
 
+
 ;; load window number mode
 (autoload 'window-number-mode "window-number"
   "A global minor mode that enables selection of windows according to
@@ -177,13 +181,26 @@ windows, use `window-number-mode' to display the window numbers in
 the mode-line."
   t)
 
+;; (require `window-number)
 (window-number-mode 1)
 (window-number-meta-mode 1)
 
 ;; save all backup files "filename~" to the backup directory
-(defun make-backup-file-name (file)
-  (concat "~/.emacs.d/_backups/" (file-name-nondirectory file) "~"))
-(put 'downcase-region 'disabled nil)
+
+(defvar user-temporary-file-directory
+  "~/.emacs_saves")
+(make-directory user-temporary-file-directory t)
+(setq backup-by-copying t)
+(setq backup-directory-alist
+      `(("." . ,user-temporary-file-directory)
+        (,tramp-file-name-regexp nil)))
+(setq auto-save-list-file-prefix
+      (concat user-temporary-file-directory ".auto-saves-"))
+(setq auto-save-file-name-transforms
+      `((".*" ,user-temporary-file-directory t)))
+
+(setq create-lockfiles nil)
+      
 ;; (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
 ;;                            (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
 
