@@ -1,0 +1,7 @@
+#! /bin/bash
+# Update Go binary
+# pass version number to fetch as first argument
+cd /home/gabe/downloads
+wget https://golang.org/dl/go$1.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf /home/gabe/downloads/go$1.linux-amd64.tar.gz
