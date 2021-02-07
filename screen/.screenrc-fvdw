@@ -6,6 +6,10 @@ screen -t fvdw
 screen -t db
 chdir "/media/gabe/Backup Plus"
 screen -t backup_plus
+chdir "/usr/local/src/innogeo"
+screen -t innogeo
+screen -t logs
 hardstatus alwayslastline
 hardstatus string "%t"
 chdir /usr/local/src/
+screen -t shell
