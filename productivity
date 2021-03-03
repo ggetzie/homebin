@@ -1,0 +1,139 @@
+#! /usr/bin/env python3
+import argparse
+import json
+import os
+import pathlib
+
+from textwrap import dedent
+
+STATE_FILE = pathlib.Path("/etc/hosts_productivity.json")
+HOSTS = pathlib.Path("/etc/hosts")
+if not STATE_FILE.exists():
+    # initialize state if not found
+    state = {
+        "on": False,
+        "blocklist": []
+    }
+    STATE_FILE.write_text(json.dumps(state))
+
+def entrify(domain):
+    return f"127.0.0.1\t{domain}"
+
+def make_entries(blocklist):
+    return [entrify(e) for e in blocklist]
+
+def read_state():
+    return json.loads(STATE_FILE.read_text())
+
+def write_state(state):
+    STATE_FILE.write_text(json.dumps(state))
+
+def on():
+    state = read_state()
+    state["on"] = True
+    lines = HOSTS.read_text().splitlines()
+    entries = make_entries(state["blocklist"])
+    for e in entries:
+        if e not in lines:
+            lines.append(e)
+    HOSTS.write_text("\n".join(lines))
+    write_state(state)
+    status()
+
+def off():
+    state = read_state()
+    state["on"] = False
+    lines = HOSTS.read_text().splitlines()
+    entries = make_entries(state["blocklist"])
+    outlines = [l for l in lines if l not in entries]
+    HOSTS.write_text("\n".join(outlines))
+    write_state(state)
+    status()
+
+def status():
+    state = read_state()
+    print(f"Productivity is {'on' if state['on'] else 'off'}")
+    print("Current blocklist:")
+    for b in state["blocklist"]:
+        print(b)
+
+def dkey(d):
+    if d.startswith("www."):
+        return d[4:]
+    else:
+        return d        
+
+def add_to_list(domains):
+    state = read_state()
+    lowered = [d.lower() for d in domains]
+    for domain in lowered:
+        if domain not in state["blocklist"]:
+            state["blocklist"].append(domain)
+            state["blocklist"] = sorted(state["blocklist"], key=dkey)
+    if state["on"]:
+        to_block = ", ".join(lowered)
+        print(f"Productivity is ON. Blocking {to_block} now.")
+        with open(HOSTS, "a") as hostfile:
+            hostfile.write("\n")
+            hostfile.write("\n".join([entrify(d) for d in lowered]))
+    write_state(state)
+    status()
+
+def remove_from_list(domains):
+    state = read_state()
+    lowered = [d.lower() for d in domains]
+    state["blocklist"] = [b for b in state["blocklist"] if b.lower() not in lowered]
+    state["blocklist"] = sorted(state["blocklist"], key=dkey)
+    if state["on"]:
+        lines = HOSTS.read_text().splitlines()
+        entries = [entrify(d) for d in lowered]
+        outlines = [l for l in lines if l not in entries]
+        HOSTS.write_text("\n".join(outlines))
+    write_state(state)
+    status()
+
+def sort_list():
+    state = read_state()
+    state["blocklist"] = sorted(state["blocklist"], key=dkey)
+    write_state(state)
+    status()
+
+if __name__ == "__main__":
+    description = """\
+    Maintain a blocklist of domains. When turned on entries will be added
+    to /etc/hosts to redirect the blocked domains to 127.0.0.1
+    """
+    parser = argparse.ArgumentParser(description=dedent(description))
+    verb_help = """\
+        on - turn the productivity blocklist on
+        off - turn the productivity blocklist off
+        status - show the current state (on or off) and the blocklist
+        add - add a domain to the blocklist
+        remove - remove a domain from the blocklist
+        """
+    parser.add_argument("verb", choices=["on", "off", "add", "remove", "status", "sort"],
+                        help=dedent(verb_help))
+    parser.add_argument("--domains", "-d", required=False, 
+                        metavar="domains",
+                        nargs="*",
+                        help="Domains to add or remove from blocklist")
+    args = parser.parse_args()
+    if args.verb == "on":
+        on()
+    elif args.verb == "off":
+        off()
+    elif args.verb == "status":
+        status()
+    elif args.verb == "add":
+        if not args.domains:
+            print("Please supply domains to add")
+        else:
+            add_to_list(args.domains)
+    elif args.verb == "remove":
+        if not args.domain:
+            print("Please supply domains to remove")
+        else:
+            remove_from_list(args.domains)
+    elif args.verb == "sort":
+        sort_list()
+    os.system("service nscd restart")
