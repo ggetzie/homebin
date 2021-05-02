@@ -81,7 +81,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 export PYTHONPATH=${PYTHONPATH}:'/home/gabe/python':''
-export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64/bin/"
+export JAVA_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin"
 
 alias ssh9="ssh -p 19999"
 alias backup="rsync -vaxEe 'ssh -p 19999' --delete --exclude='.cache' ~ '/media/gabe/My Book/backup/'"
@@ -124,6 +124,7 @@ alias rdf-datatypes="awk -F'\x5E' '/\"\^\^</ { print substr(\$3, 2, length(\$3)-
 
 export PATH="/home/gabe/bin:/usr/lib/postgresql/12/bin:/home/gabe/android/android-sdk-linux/tools:/home/gabe/.local/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$PATH:/usr/local/go/bin:/home/gabe/go/bin"
 # added by Anaconda3 2.3.0 installer
 # export PATH="/home/gabe/python/anaconda3/bin:$PATH"
 
@@ -183,3 +184,4 @@ alias timekeeperenv="source /usr/local/src/env/timekeeper/bin/activate"
 alias eg_psatenv="source /usr/local/src/env/eg_psat/bin/activate"
 alias hkuvpn='/opt/cisco/anyconnect/bin/vpn connect vpn2fa.hku.hk'
 alias hkuvpnd="/opt/cisco/anyconnect/bin/vpn disconnect vpn2fa.hku.hk"
+alias android-studio='/home/gabe/android-studio/bin/studio.sh'
