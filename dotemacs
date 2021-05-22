@@ -18,6 +18,18 @@
 
 (add-to-list 'load-path "/home/gabe/emacs/scss-mode")
 
+;; load el-get
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
+(el-get 'sync)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -39,8 +51,8 @@
 
 ;; (require 'auto-resize)
 
-;; (set-default-font "-*-fixed-medium-r-*-*-20-*-*-*-*-*-iso8859-*")
-;; (set-face-attribute 'default (selected-frame) :height 102)
+;;(set-default-font "-*-fixed-medium-r-*-*-18-*-*-*-*-*-iso8859-*")
+(set-face-attribute 'default (selected-frame) :height 100)
 
 (setq-default fill-column 80)
 (setq-default py-indent-offset 4)
@@ -67,7 +79,6 @@
 (global-set-key [(control insert)] 'clipboard-kill-ring-save)
 (global-set-key [(shift insert)] 'clipboard-yank)
 (global-set-key [f5] 'call-last-kbd-macro)
-
 
 ;; link some more modes to file extensions
 
@@ -162,18 +173,6 @@ numbers with the C-x C-j prefix.  Another mode,
 `window-number-meta-mode' enables the use of the M- prefix."
   t)
 
-;; load el-get
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
-    (goto-char (point-max))
-    (eval-print-last-sexp)))
-
-(add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
-(el-get 'sync)
 
 (autoload 'window-number-meta-mode "window-number"
   "A global minor mode that enables use of the M- prefix to select
@@ -185,8 +184,11 @@ the mode-line."
 (window-number-mode 1)
 (window-number-meta-mode 1)
 
-;; save all backup files "filename~" to the backup directory
 
+;; Set up ledger mode
+(add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
+
+;; save all backup files "filename~" to the backup directory
 (defvar user-temporary-file-directory
   "~/.emacs_saves")
 (make-directory user-temporary-file-directory t)
@@ -200,6 +202,10 @@ the mode-line."
       `((".*" ,user-temporary-file-directory t)))
 
 (setq create-lockfiles nil)
+
+;; auto complete
+(ac-config-default)
+;; (require 'autocomplete)
       
 ;; (message "My .emacs loaded in %ds" (destructuring-bind (hi lo ms) (current-time)
 ;;                            (- (+ hi lo) (+ (first *emacs-load-start*) (second *emacs-load-start*)))))
