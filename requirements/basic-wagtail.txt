@@ -2,7 +2,7 @@ asgiref==3.2.7
 beautifulsoup4==4.8.2
 certifi==2020.4.5.1
 chardet==3.0.4
-Django==3.1.8
+Django==3.1.10
 django-environ==0.4.5
 django-extensions==2.2.9
 django-modelcluster==5.0.2
@@ -14,7 +14,7 @@ gunicorn==20.0.4
 html5lib==1.0.1
 idna==2.9
 l18n==2018.5
-Pillow==8.1.1
+Pillow==8.2.0
 psycopg2==2.8.5
 pytz==2020.1
 requests==2.23.0
@@ -22,7 +22,7 @@ six==1.15.0
 soupsieve==2.0.1
 sqlparse==0.3.1
 Unidecode==1.1.1
-urllib3==1.25.9
+urllib3==1.26.5
 wagtail==2.11.6
 Wand==0.6.1
 webencodings==0.5.1
