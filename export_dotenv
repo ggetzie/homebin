@@ -1,0 +1,8 @@
+#! /bin/sh
+# USAGE: source unset_dotenv project-slug
+PROJECT_SLUG=${1:?"You must supply the project abbreviation"}
+ENV_FILE=/usr/local/src/${PROJECT_SLUG}/.env
+export $(cat ${ENV_FILE} | xargs)
+
+
+

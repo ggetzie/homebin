@@ -1,0 +1,51 @@
+#! /usr/bin/env bash
+PROJECT_SLUG=${1:?"You must supply the project abbreviation"}
+
+SECRET_KEY=`keygen 50`
+DB_PW=`keygen 15`
+
+PROJECT_DIR=/usr/local/src/${PROJECT_SLUG}
+
+DOT_ENV=${PROJECT_DIR}/.env
+
+echo -e "DJANGO_SECRET_KEY=${SECRET_KEY}" >> $DOT_ENV
+echo -e "DB_NAME=${PROJECT_SLUG}" >> $DOT_ENV
+echo -e "DB_PW=${DB_PW}" >> $DOT_ENV
+echo -e "DB_USER=${PROJECT_SLUG}_user" >> $DOT_ENV
+echo -e "DB_HOST=localhost" >> $DOT_ENV
+echo -e "CELERY_BROKER_URL=redis://127.0.0.1:6379/1" >> $DOT_ENV
+echo -e "REDIS_URL=redis://127.0.0.1:6379/1" >> $DOT_ENV
+echo -e "AWS_ACCESS_KEY_ID=your-aws-access-key" >> $DOT_ENV
+echo -e "AWS_SECRET_ACCESS_KEY=your-aws-secret" >> $DOT_ENV
+echo -e "DJANGO_AWS_STORAGE_BUCKET_NAME=bucket-name" >> $DOT_ENV
+echo -e "DJANGO_AWS_S3_REGION_NAME=us-east-1" >> $DOT_ENV
+echo -e "DJANGO_AWS_S3_CUSTOM_DOMAIN=s3-or-cloudfront-domain" >> $DOT_ENV
+echo -e "DJANGO_SERVER_EMAIL=server@kotsf.com" >> $DOT_ENV
+echo -e "DJANGO_ADMIN_URL=admin/" >> $DOT_ENV
+
+# if there's not an alias in the .bashrc file to activate the environment, add one
+ENV_COMMAND="alias ${PROJECT_SLUG}env=\"source /usr/local/src/env/${PROJECT_SLUG}/bin/activate\""
+ALIASED=`grep "${ENV_COMMAND}" ~/.bashrc`
+if [ -z "$ALIASED" ]
+then
+    echo "Adding alias ${PROJECT_SLUG}env to start env in your .bashrc"
+    echo -e $ENV_COMMAND >> ~/.bashrc
+fi 
+
+# Make sure git ignores the .env file
+GITIGNORE=${PROJECT_DIR}/.gitignore
+if [ ! -e $GITIGNORE ]
+then
+    echo "Creating .gitignore file and adding .env"
+    echo -e ".env" > $GITIGNORE
+else
+    ignored=`grep "^\.env" ${GITIGNORE}`
+    if [ -z $ignored ]
+    then
+        echo "Adding .env to your .gitignore file"
+        echo -e ".env" >> $GITIGNORE
+    else
+        echo ".env already in .gitignore. Good Job!"
+    fi
+fi
+
