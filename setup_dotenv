@@ -49,7 +49,7 @@ echo -e "DJANGO_ADMIN_URL=admin/" >> $DOT_ENV
 
 # if there's not an alias in the .bashrc file to activate the environment, add one
 ENV_COMMAND="alias ${PROJECT_SLUG}env=\"source /usr/local/src/env/${PROJECT_SLUG}/bin/activate\""
-ALIASED=`grep "${ENV_COMMAND}" ~/.bashrc`
+ALIASED=$(grep "${ENV_COMMAND}" ~/.bashrc)
 if [ -z "$ALIASED" ]
 then
     echo "Adding alias ${PROJECT_SLUG}env to start env in your .bashrc"
@@ -67,7 +67,7 @@ else
     if [ -z $ignored ]
     then
         echo "Adding .env to your .gitignore file"
-        echo -e ".env" >> $GITIGNORE
+        echo -e "\n.env" >> $GITIGNORE
     else
         echo ".env already in .gitignore. Good Job!"
     fi
