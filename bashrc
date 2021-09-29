@@ -81,7 +81,7 @@ if [ -f /etc/bash_completion ]; then
 fi
 
 export PYTHONPATH=${PYTHONPATH}:'/home/gabe/python':''
-export JAVA_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64/bin"
+export JAVA_HOME="/usr/lib/jvm/java-1.11.0-openjdk-amd64"
 
 alias ssh9="ssh -p 19999"
 alias backup="rsync -vaxEe 'ssh -p 19999' --delete --exclude='.cache' ~ '/media/gabe/My Book/backup/'"
@@ -90,7 +90,6 @@ alias phonesync="rsync -vaxEe --delete /media/GalaxyNexus/ /media/data/phone/gne
 alias PMS="sudo /home/gabe/downloads/pms-1.90.1/PMS.sh"
 alias gdenv="source /home/gabe/python/env/gd/bin/activate"
 alias cva="source /home/gabe/python/env/ceavy/bin/activate"
-alias cvea="source /home/gabe/python/env/cveng/bin/activate"
 alias cash="source /usr/local/src/env/cash/bin/activate"
 alias recash="sudo supervisorctl restart cashcal"
 alias sbenv="source /usr/local/src/env/sblog/bin/activate"
@@ -145,22 +144,11 @@ alias recv="sudo supervisorctl restart ceevee"
 alias mscv="cd /usr/local/src/ceevee"
 alias cf="cd /usr/local/src/learn-react/cashflo_0-1"
 alias mdulenv="source /usr/local/src/env/mdul/bin/activate"
-
-alias screen-nnr="screen -S nnr -c /home/gabe/bin/.screenrc-nnr"
-alias screen-bfm="screen -S bfm -c /home/gabe/bin/.screenrc-bfm"
-alias screen-aeq="screen -S aeq -c /home/gabe/bin/.screenrc-aeq"
-alias screen-fvdw="screen -S fvdw -c /home/gabe/bin/screen/.screenrc-fvdw"
-alias screen-blog="screen -S blog -c /home/gabe/bin/screen/.screenrc-blog"
-alias screen-base="screen -S work -c /home/gabe/bin/screen/.screenrc-base"
-
 alias nnrenv="source /usr/local/src/env/nnr/bin/activate"
 alias nnr="cd /usr/local/src/nnr"
 alias rennr="sudo supervisorctl restart nnr"
 alias homenv="source /usr/local/src/env/home/bin/activate"
 alias nnrfwd="stripe listen --forward-to nnr/main/webhook/"
-alias recv="sudo supervisorctl restart ceevee"
-alias bfmenv="source /usr/local/src/env/J2020_0001/bin/activate"
-alias bfm="cd /usr/local/src/J2020_0001"
 alias py38="source /usr/local/src/env/py38/bin/activate"
 alias aeqcmsenv="source /usr/local/src/env/aeqcms/bin/activate"
 alias aeqcms="cd /usr/local/src/aeqcms"
@@ -185,3 +173,5 @@ alias eg_psatenv="source /usr/local/src/env/eg_psat/bin/activate"
 alias hkuvpn='/opt/cisco/anyconnect/bin/vpn connect vpn2fa.hku.hk'
 alias hkuvpnd="/opt/cisco/anyconnect/bin/vpn disconnect vpn2fa.hku.hk"
 alias android-studio='/home/gabe/android-studio/bin/studio.sh'
+alias py39="source /usr/local/src/env/py39/bin/activate"
+alias taw_apienv="source /usr/local/src/env/taw_api/bin/activate"
