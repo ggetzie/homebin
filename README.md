@@ -17,7 +17,7 @@ short helpful scripts for /home/$USER/bin
 
 - `lsp`: pipe output from `ls` through `less`, preserving colors, so you can page through large directories
 
-- `make-logs`: create logs directory and touch commonly used log files for Django projects
+- `make_logs`: create logs directory and touch commonly used log files for Django projects
 
 - `passphrase`: create a passphrase of randomly selected words from the given dictionary file. Tries to use /usr/share/dict/american-english by default. Optionally, randomly replace characters with "133+" speak equivalents.
 
