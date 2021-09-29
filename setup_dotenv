@@ -1,12 +1,36 @@
 #! /usr/bin/env bash
-PROJECT_SLUG=${1:?"You must supply the project abbreviation"}
+WAGTAIL=0
 
-SECRET_KEY=`keygen 50`
-DB_PW=`keygen 15`
+while :; do
+    case $1 in
+        -w|--wagtail)
+            WAGTAIL=1
+            shift
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            break
+    esac
+done
+
+PROJECT_SLUG=${1:?"You must supply the project abbreviation"}
+STATE=${2:?"You must supply the project state - local/dev or production"}
+
+SECRET_KEY=$( keygen 50 )
+DB_PW=$( keygen 15 )
 
 PROJECT_DIR=/usr/local/src/${PROJECT_SLUG}
-
 DOT_ENV=${PROJECT_DIR}/.env
+
+if [ $WAGTAIL -eq 1 ]
+then
+    echo -e "DJANGO_SETTINGS_MODULE=${PROJECT_SLUG}.settings.${STATE}" >> $DOT_ENV
+else
+    echo -e "DJANGO_SETTINGS_MODULE=config.settings.${STATE}" >> $DOT_ENV
+fi
 
 echo -e "DJANGO_SECRET_KEY=${SECRET_KEY}" >> $DOT_ENV
 echo -e "DB_NAME=${PROJECT_SLUG}" >> $DOT_ENV

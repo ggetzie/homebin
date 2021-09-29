@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import argparse
+import os
 import pathlib
 import socket
 import sys
@@ -48,7 +49,8 @@ if __name__ == "__main__":
     context = {"PROJECT_SLUG": args.slug,
                "PROJECT_USER": args.user,
                "PROJECT_PORT": args.port}
-    templates = pathlib.Path("/home/gabe/bin/templates")
+    HOME_DIR = pathlib.Path(os.environ["HOME"])
+    templates = HOME_DIR / "bin/templates"
     dest = pathlib.Path(f"/usr/local/src/{args.slug}/srv/local")
     dest.mkdir(exist_ok=True, parents=True)
     with open(templates / "gunicorn_start.bash") as gunicorn_file:

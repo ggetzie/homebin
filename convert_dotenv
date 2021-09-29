@@ -1,0 +1,25 @@
+#! /usr/bin/env bash
+# copy environment variables stored in the venv activate script
+# into a separate .env file in the project directory
+PROJECT_SLUG=${1:?"You must supply the project abbreviation"}
+
+grep -E "^export \w+=" /usr/local/src/env/${PROJECT_SLUG}/bin/activate | \
+sed "s/^export //" | sed "s/=['\"]/=/" | sed "s/['\"]$//" \
+> /usr/local/src/${PROJECT_SLUG}/.env
+
+# Make sure git ignores the .env file
+GITIGNORE=/usr/local/src/${PROJECT_SLUG}/.gitignore
+if [ ! -e $GITIGNORE ]
+then
+    echo "Creating .gitignore file and adding .env"
+    echo -e ".env" > $GITIGNORE
+else
+    ignored=$(grep "^\.env" ${GITIGNORE})
+    if [ -z $ignored ]
+    then
+        echo "Adding .env to your .gitignore file"
+        echo -e "\n.env" >> $GITIGNORE
+    else
+        echo ".env already in .gitignore. Good Job!"
+    fi
+fi
