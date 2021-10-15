@@ -1,6 +1,8 @@
 escape ^Zz
 bindkey -k k9 next
 bindkey -k k8 prev
+hardstatus alwayslastline
+hardstatus string "%t"
 chdir /usr/local/src/
 screen -t work
 screen -t db
@@ -8,6 +10,4 @@ chdir /home/gabe/credentials
 screen -t ssh
 chdir /usr/local/src
 screen -t logs
-hardstatus alwayslastline
-hardstatus string "%t"
-chdir /usr/local/src/
+select work

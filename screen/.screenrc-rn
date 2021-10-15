@@ -1,0 +1,11 @@
+escape ^Zz
+hardstatus alwayslastline
+hardstatus string "%t"
+bindkey -k k9 next
+bindkey -k k8 prev
+chdir /usr/local/src/
+screen -t work
+screen -t logs
+screen -t metro
+select work
+
