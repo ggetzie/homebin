@@ -1,4 +1,5 @@
 #! /bin/bash
+# shrink PDFs with ghostscript
 
 gs -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/screen -dNOPAUSE -dQUIET -dBATCH -sOutputFile=c$1 $1
 rm $1
