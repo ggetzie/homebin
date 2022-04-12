@@ -2,19 +2,21 @@
 ;;; Commentary:
 ;;; Code:
 (defvar *emacs-load-start* (current-time))
-(setq custom-file "~/.emacs-custom.el")
-(load custom-file 'noerror)
-
-(eval-when-compile
-  ;; Following line is not needed if use-package.el is in ~/.emacs.d
-  ;; (add-to-list 'load-path "<path where use-package is installed>")
-  (require 'use-package))
-
 
 (add-to-list 'load-path "/home/gabe/emacs/")
 (add-to-list 'load-path "/home/gabe/emacs/yaml-mode/")
 (add-to-list 'load-path "/home/gabe/emacs/typescript-mode/")
 (add-to-list 'load-path "/home/gabe/emacs/markdown-mode/")
+
+;; (autoload 'ledger-mode "ledger-mode" "A major mode for Ledger" t)
+(add-to-list 'load-path  "/home/gabe/emacs/ledger-mode/")
+(require 'ledger-mode)
+(add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
+(add-hook 'ledger-mode-hook
+	  (lambda ()
+	    (setq-local tab-always-indent 'complete)
+	    (setq-local completion-cycle-threshold t)
+	    (setq-local ledger-complete-in-steps t)))
 
 (add-to-list 'load-path "/home/gabe/emacs/scss-mode")
 
@@ -30,6 +32,13 @@
 
 (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 (el-get 'sync)
+
+(setq custom-file "~/.emacs-custom.el")
+(load custom-file 'noerror)
+(eval-when-compile
+  ;; Following line is not needed if use-package.el is in ~/.emacs.d
+  ;; (add-to-list 'load-path "<path where use-package is installed>")
+  (require 'use-package))
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -185,8 +194,7 @@ the mode-line."
 (window-number-meta-mode 1)
 
 
-;; Set up ledger mode
-(add-to-list 'auto-mode-alist '("\\.ledger$" . ledger-mode))
+
 
 ;; save all backup files "filename~" to the backup directory
 (defvar user-temporary-file-directory
@@ -215,6 +223,8 @@ the mode-line."
 ;; start working!
 (split-window-horizontally)
 (dired "/usr/local/src/kotsf-posts/")
+(dired "/home/gabe/Dropbox/money/")
+(dired "/home/gabe/Dropbox/kotsf/Administration/Accounting")
 ;; (shell "pyserver")
 ;; (shell "pyshell")
 (balance-windows)
