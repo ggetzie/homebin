@@ -47,15 +47,6 @@ echo -e "DJANGO_AWS_S3_CUSTOM_DOMAIN=s3-or-cloudfront-domain" >> $DOT_ENV
 echo -e "DJANGO_SERVER_EMAIL=server@kotsf.com" >> $DOT_ENV
 echo -e "DJANGO_ADMIN_URL=admin/" >> $DOT_ENV
 
-# if there's not an alias in the .bashrc file to activate the environment, add one
-ENV_COMMAND="alias ${PROJECT_SLUG}env=\"source /usr/local/src/env/${PROJECT_SLUG}/bin/activate\""
-ALIASED=$(grep "${ENV_COMMAND}" ~/.bashrc)
-if [ -z "$ALIASED" ]
-then
-    echo "Adding alias ${PROJECT_SLUG}env to start env in your .bashrc"
-    echo -e $ENV_COMMAND >> ~/.bashrc
-fi 
-
 # Make sure git ignores the .env file
 GITIGNORE=${PROJECT_DIR}/.gitignore
 if [ ! -e $GITIGNORE ]
