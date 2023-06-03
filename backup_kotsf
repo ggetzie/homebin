@@ -4,7 +4,7 @@
 # Check that the environment variable KOTSF_PORT is set, exit with error if not
 if [ -z ${KOTSF_PORT} ]
 then
-    echo "You must set the environment variable KOTSF_PORT to the port number of the SSH tunnel to kotsf.com"
+    echo "You must set the environment variable KOTSF_PORT"
     exit 1
 fi
 BACKUP_ROOT=${HOME}/Dropbox/backup/kotsf
@@ -37,19 +37,20 @@ ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump arai_db | gzip -c" > ${BACKUP_ROOT}
 scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/askreddit_but_ai/arai/.env ${BACKUP_ROOT}/askreddit_but_ai/arai_env
 
 # backup aeq
-echo "Backing up aeq"
-mkdir -p ${BACKUP_ROOT}/aeq
+# This won't change. Backed up 2023-06-03
+# echo "Backing up aeq"
+# mkdir -p ${BACKUP_ROOT}/aeq
 
 ## dump the postgres database on the server
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeq_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeq_db.pgsql.gz
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeqcms_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeqcms_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeq_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeq_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeqcms_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeqcms_db.pgsql.gz
 
 ## copy the .env files
-scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aeq/.env ${BACKUP_ROOT}/aeq/aeq_env
-scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aeqcms/.env ${BACKUP_ROOT}/aeq/aeqcms_env
+# scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aeq/.env ${BACKUP_ROOT}/aeq/aeq_env
+# scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aeqcms/.env ${BACKUP_ROOT}/aeq/aeqcms_env
 
 # copy media files
-rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/usr/local/src/aeqcms/media/ ${BACKUP_ROOT}/aeq/cmsmedia/
+# rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/usr/local/src/aeqcms/media/ ${BACKUP_ROOT}/aeq/cmsmedia/
 
 # backup kotsf_biz
 echo "Backing up kotsf_biz"
@@ -101,20 +102,21 @@ ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump j2020_0003_db | gzip -c" > ${BACKUP
 scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/j2020_0003/.env ${BACKUP_ROOT}/J2020_0003/j2020_0003_env
 
 # backup prophit
-echo "Backing up prophit"
-mkdir -p ${BACKUP_ROOT}/prophit
+# This won't change. Backed up 2023-06-03
+# echo "Backing up prophit"
+# mkdir -p ${BACKUP_ROOT}/prophit
 
 ## dump the postgres database on the server
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_main_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_main_db.pgsql.gz
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_stage_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_stage_db.pgsql.gz
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump engeniumgroup_db | gzip -c" > ${BACKUP_ROOT}/prophit/engeniumgroup_db.pgsql.gz
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump fakecompany_db | gzip -c" > ${BACKUP_ROOT}/prophit/fakecompany_db.pgsql.gz
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump gabestesting_db | gzip -c" > ${BACKUP_ROOT}/prophit/gabestesting_db.pgsql.gz
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump monicaco_db | gzip -c" > ${BACKUP_ROOT}/prophit/monicaco_db.pgsql.gz
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump newco_db | gzip -c" > ${BACKUP_ROOT}/prophit/newco_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_main_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_main_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_stage_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_stage_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump engeniumgroup_db | gzip -c" > ${BACKUP_ROOT}/prophit/engeniumgroup_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump fakecompany_db | gzip -c" > ${BACKUP_ROOT}/prophit/fakecompany_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump gabestesting_db | gzip -c" > ${BACKUP_ROOT}/prophit/gabestesting_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump monicaco_db | gzip -c" > ${BACKUP_ROOT}/prophit/monicaco_db.pgsql.gz
+# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump newco_db | gzip -c" > ${BACKUP_ROOT}/prophit/newco_db.pgsql.gz
 
 ## backup media files
-rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/var/www/prophit_uploads/ ${BACKUP_ROOT}/prophit/uploads/
+# rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/var/www/prophit_uploads/ ${BACKUP_ROOT}/prophit/uploads/
 
 
 
