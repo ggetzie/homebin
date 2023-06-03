@@ -1,1 +1,121 @@
 #! /usr/bin/env bash
+# Script to download databases and files stored on the server
+
+# Check that the environment variable KOTSF_PORT is set, exit with error if not
+if [ -z ${KOTSF_PORT} ]
+then
+    echo "You must set the environment variable KOTSF_PORT to the port number of the SSH tunnel to kotsf.com"
+    exit 1
+fi
+BACKUP_ROOT=${HOME}/Dropbox/backup/kotsf
+
+mkdir -p ${BACKUP_ROOT}
+
+# backup aslcv2
+echo "Backing up aslcv2"
+mkdir -p ${BACKUP_ROOT}/aslcv2
+
+## dump the postgres databases on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump archaeology | gzip -c" > ${BACKUP_ROOT}/aslcv2/archaeology.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aslcv2_be | gzip -c" > ${BACKUP_ROOT}/aslcv2/aslcv2_be.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aslcv2_be_db | gzip -c" > ${BACKUP_ROOT}/aslcv2/aslcv2_be_db.pgsql.gz
+
+## copy the .env file
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aslcv2_be/.env ${BACKUP_ROOT}/aslcv2/aslcv2_env
+
+## copy the media files
+rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/usr/local/src/aslcv2_be/media/ ${BACKUP_ROOT}/aslcv2/media/
+
+# backup askreddit_but_ai
+echo "Backing up askreddit_but_ai"
+mkdir -p ${BACKUP_ROOT}/askreddit_but_ai
+
+## dump the postgres database on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump arai_db | gzip -c" > ${BACKUP_ROOT}/askreddit_but_ai/arai_db.pgsql.gz
+
+## copy the .env file
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/askreddit_but_ai/arai/.env ${BACKUP_ROOT}/askreddit_but_ai/arai_env
+
+# backup aeq
+echo "Backing up aeq"
+mkdir -p ${BACKUP_ROOT}/aeq
+
+## dump the postgres database on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeq_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeq_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeqcms_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeqcms_db.pgsql.gz
+
+## copy the .env files
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aeq/.env ${BACKUP_ROOT}/aeq/aeq_env
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aeqcms/.env ${BACKUP_ROOT}/aeq/aeqcms_env
+
+# copy media files
+rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/usr/local/src/aeqcms/media/ ${BACKUP_ROOT}/aeq/cmsmedia/
+
+# backup kotsf_biz
+echo "Backing up kotsf_biz"
+mkdir -p ${BACKUP_ROOT}/kotsf_biz
+
+## dump the postgres database on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump kotsf_biz_db | gzip -c" > ${BACKUP_ROOT}/kotsf_biz/kotsf_biz_db.pgsql.gz
+
+## copy the .env file
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/kotsf_biz/.env ${BACKUP_ROOT}/kotsf_biz/kotsf_biz_env
+
+# copy media files
+rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/usr/local/src/kotsf_biz/media/ ${BACKUP_ROOT}/kotsf_biz/media/
+
+# backup mscv2
+echo "Backing up mscv2"
+mkdir -p ${BACKUP_ROOT}/mscv2
+
+## dump the postgres database on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump mscv2_db | gzip -c" > ${BACKUP_ROOT}/mscv2/mscv2_db.pgsql.gz
+
+## copy the .env file
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/mscv2/.env ${BACKUP_ROOT}/mscv2/mscv2_env
+
+## copy the media files
+rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/usr/local/src/mscv2/media/ ${BACKUP_ROOT}/mscv2/media/
+
+# backup postcard prank
+echo "Backing up postcard prank"
+mkdir -p ${BACKUP_ROOT}/postcard_prank
+
+## dump the postgres database on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump pcp_db | gzip -c" > ${BACKUP_ROOT}/postcard_prank/pcp_db.pgsql.gz
+
+## copy the .env file
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/pcp/.env ${BACKUP_ROOT}/postcard_prank/pcp_env
+
+## copy the media files
+rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/var/www/pcp/ ${BACKUP_ROOT}/postcard_prank/media/
+
+# backup J2020_0003 (ED)
+echo "Backing up J2020_0003 (ED)"
+mkdir -p ${BACKUP_ROOT}/J2020_0003
+
+## dump the postgres database on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump j2020_0003_db | gzip -c" > ${BACKUP_ROOT}/J2020_0003/j2020_0003_db.pgsql.gz
+
+## copy the .env file
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/j2020_0003/.env ${BACKUP_ROOT}/J2020_0003/j2020_0003_env
+
+# backup prophit
+echo "Backing up prophit"
+mkdir -p ${BACKUP_ROOT}/prophit
+
+## dump the postgres database on the server
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_main_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_main_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_stage_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_stage_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump engeniumgroup_db | gzip -c" > ${BACKUP_ROOT}/prophit/engeniumgroup_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump fakecompany_db | gzip -c" > ${BACKUP_ROOT}/prophit/fakecompany_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump gabestesting_db | gzip -c" > ${BACKUP_ROOT}/prophit/gabestesting_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump monicaco_db | gzip -c" > ${BACKUP_ROOT}/prophit/monicaco_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump newco_db | gzip -c" > ${BACKUP_ROOT}/prophit/newco_db.pgsql.gz
+
+## backup media files
+rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/var/www/prophit_uploads/ ${BACKUP_ROOT}/prophit/uploads/
+
+
+
+
