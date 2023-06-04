@@ -42,8 +42,8 @@ scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/askreddit_but_ai/arai/.env ${
 # mkdir -p ${BACKUP_ROOT}/aeq
 
 ## dump the postgres database on the server
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeq_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeq_db.pgsql.gz
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeqcms_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeqcms_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeq_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeq_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump aeqcms_db | gzip -c" > ${BACKUP_ROOT}/aeq/aeqcms_db.pgsql.gz
 
 ## copy the .env files
 # scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/aeq/.env ${BACKUP_ROOT}/aeq/aeq_env
@@ -99,7 +99,7 @@ mkdir -p ${BACKUP_ROOT}/J2020_0003
 ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump j2020_0003_db | gzip -c" > ${BACKUP_ROOT}/J2020_0003/j2020_0003_db.pgsql.gz
 
 ## copy the .env file
-scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/j2020_0003/.env ${BACKUP_ROOT}/J2020_0003/j2020_0003_env
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/J2020_0003/.env ${BACKUP_ROOT}/J2020_0003/j2020_0003_env
 
 # backup prophit
 # This won't change. Backed up 2023-06-03
@@ -107,13 +107,13 @@ scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/j2020_0003/.env ${BACKUP_ROOT
 # mkdir -p ${BACKUP_ROOT}/prophit
 
 ## dump the postgres database on the server
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_main_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_main_db.pgsql.gz
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_stage_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_stage_db.pgsql.gz
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump engeniumgroup_db | gzip -c" > ${BACKUP_ROOT}/prophit/engeniumgroup_db.pgsql.gz
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump fakecompany_db | gzip -c" > ${BACKUP_ROOT}/prophit/fakecompany_db.pgsql.gz
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump gabestesting_db | gzip -c" > ${BACKUP_ROOT}/prophit/gabestesting_db.pgsql.gz
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump monicaco_db | gzip -c" > ${BACKUP_ROOT}/prophit/monicaco_db.pgsql.gz
-# ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump newco_db | gzip -c" > ${BACKUP_ROOT}/prophit/newco_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_main_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_main_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump prophit_stage_db | gzip -c" > ${BACKUP_ROOT}/prophit/prophit_stage_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump engeniumgroup_db | gzip -c" > ${BACKUP_ROOT}/prophit/engeniumgroup_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump fakecompany_db | gzip -c" > ${BACKUP_ROOT}/prophit/fakecompany_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump gabestesting_db | gzip -c" > ${BACKUP_ROOT}/prophit/gabestesting_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump monicaco_db | gzip -c" > ${BACKUP_ROOT}/prophit/monicaco_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump newco_db | gzip -c" > ${BACKUP_ROOT}/prophit/newco_db.pgsql.gz
 
 ## backup media files
 # rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/var/www/prophit_uploads/ ${BACKUP_ROOT}/prophit/uploads/
