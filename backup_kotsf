@@ -78,18 +78,18 @@ scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/mscv2/.env ${BACKUP_ROOT}/msc
 ## copy the media files
 rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/usr/local/src/mscv2/media/ ${BACKUP_ROOT}/mscv2/media/
 
-# backup postcard prank
-echo "Backing up postcard prank"
-mkdir -p ${BACKUP_ROOT}/postcard_prank
+# backup vyfntp
+echo "Backing up vyfntp"
+mkdir -p ${BACKUP_ROOT}/vyfntp
 
 ## dump the postgres database on the server
-ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump pcp_db | gzip -c" > ${BACKUP_ROOT}/postcard_prank/pcp_db.pgsql.gz
+ssh -p ${KOTSF_PORT} gabe@kotsf.com "pg_dump pcp_db | gzip -c" > ${BACKUP_ROOT}/vyfntp/pcp_db.pgsql.gz
 
 ## copy the .env file
-scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/pcp/.env ${BACKUP_ROOT}/postcard_prank/pcp_env
+scp -P ${KOTSF_PORT} gabe@kotsf.com:/usr/local/src/pcp/.env ${BACKUP_ROOT}/vyfntp/pcp_env
 
 ## copy the media files
-rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/var/www/pcp/ ${BACKUP_ROOT}/postcard_prank/media/
+rsync -e "ssh -p ${KOTSF_PORT}" -avz gabe@kotsf.com:/var/www/pcp/ ${BACKUP_ROOT}/vyfntp/media/
 
 # backup J2020_0003 (ED)
 echo "Backing up J2020_0003 (ED)"
