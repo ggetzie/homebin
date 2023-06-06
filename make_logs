@@ -5,3 +5,6 @@ touch logs/debug.log
 touch logs/nginx-access.log
 touch logs/nginx-error.log
 touch logs/gunicorn_supervisor.log
+
+sudo chown www-data:www-data logs/nginx-access.log
+sudo chown www-data:www-data logs/nginx-error.log
