@@ -19,8 +19,8 @@ done
 PROJECT_SLUG=${1:?"You must supply the project abbreviation"}
 STATE=${2:?"You must supply the project state - local/dev or production"}
 
-SECRET_KEY=$( keygen 50 )
-DB_PW=$( keygen 15 )
+SECRET_KEY=$( keygen 128 --charset alphanum )
+DB_PW=$( keygen 64 --charset alphanum )
 
 PROJECT_DIR=/usr/local/src/${PROJECT_SLUG}
 DOT_ENV=${PROJECT_DIR}/.env
