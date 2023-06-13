@@ -26,24 +26,32 @@ export PATH
 ## Move over sites from old server
 
 ### ASLCV2
-#### Create app user
-#### clone the repository
-#### Create virtual environment and install dependencies
-#### copy over env file
-#### set up database
-#### copy over media files
-#### link supervisor and nginx conf files
+- Create app user
+- clone the repository
+- Create virtual environment and install dependencies
+- copy over env file
+- set up database
+- copy over media files
+- link supervisor and nginx conf files
 
 ### askreddit_but_ai
 
 ### vyfntp
-
+- create app user
+- clone repository
+- create virtual environment
+- copy over .env file
+- set up database
+- copy media files
+- link supervisor and nginx conf files
+- create logs
+  
 ### mscv2
 
 ### J2020_0003
 
 ### kotsf_biz
-
+- done
 ### tiltingatwindmills
 
 ### books
@@ -51,6 +59,7 @@ export PATH
 - Set up calibre on new server
 - rsync library from older server
 - copy over user db
+- copy nginx conf file
 
 ### greaterdebater (tcd)
 
