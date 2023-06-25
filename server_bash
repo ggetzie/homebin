@@ -1,0 +1,7 @@
+PATH=/home/ubuntu/bin:${PATH}
+export PATH
+alias va="source .venv/bin/activate"
+alias srs="sudo supervisorctl restart"
+alias ls="ls --color=auto "
+
+PS1='${debian_chroot:+($debian_chroot)}\[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;33m\]\w\[\033[00m\]\$ '
