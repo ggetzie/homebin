@@ -1,22 +1,6 @@
 #!/usr/bin/env python
-
 import argparse
-import random
-import string
-
-CHARSETS = {
-    "alpha": string.ascii_letters,
-    "lower": string.ascii_lowercase,
-    "upper": string.ascii_uppercase,
-    "alphanum": string.ascii_letters + string.digits,
-    "all": string.ascii_letters + string.digits + "!@$%^&*_|#",
-}
-
-
-def random_string(length=10, charset="all"):
-    chars = CHARSETS[charset]
-    return "".join([random.SystemRandom().choice(chars) for _ in range(length)])
-
+from util import random_string, CHARSETS
 
 if __name__ == "__main__":
     desc = "Generate a random string using system random"
