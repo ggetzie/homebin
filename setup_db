@@ -1,8 +1,32 @@
 #! /usr/bin/env bash
 
-DB_USER=${1:?"You must supply the username for the new database user"}
-DB_NAME=${2:?"You must supply the name for the new database"}
-DB_PW=${3:?"You must supply the password for the new user (use environment variable)"}
+for arg in "$@"
+do
+    case $arg in
+        -h|--help)
+            echo "Usage: setup_db project-slug [OPTIONS]"
+            echo "Creates a new Postgresql database using the values "
+            echo "DB_NAME, DB_USER, DB_PW in the .env file at /usr/local/src/project-slug/.env"
+            echo ""
+            echo "Options:"
+            echo "   -h, --help   Show this help message and exit"
+            echo ""
+            exit 0
+            ;;
+    esac
+done
+
+SLUG=${1:?"You must supply name of the project directory in /usr/local/src"}
+
+echo "Reading variables in /usr/local/src/${SLUG}/.env"
+echo "Please ensure variables DB_NAME, DB_USER and DB_PW are defined and"
+echo "that all values are bash safe or single-quoted"
+
+source /usr/local/src/${SLUG}/.env
+
+# DB_USER=${1:?"You must supply the username for the new database user"}
+# DB_NAME=${2:?"You must supply the name for the new database"}
+# DB_PW=${3:?"You must supply the password for the new user (use environment variable)"}
 
 echo "About to create new database ${DB_NAME} owned by user ${DB_USER} with password ${DB_PW}"
 read -p 'Proceed? Y[N]: ' CONFIRM
