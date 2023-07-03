@@ -1,0 +1,2 @@
+#! /usr/bin/env bash
+find /usr/local/src -maxdepth 2 -name \.env -exec grep -EH "redis://127\.0\.0\.1:6379/([0-9]+)$" {} \;
