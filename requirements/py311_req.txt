@@ -116,7 +116,7 @@ types-html5lib==1.1.11.15
 typing_extensions==4.7.1
 tzdata==2023.3
 uri-template==1.3.0
-urllib3==2.0.4
+urllib3==1.26.17
 wcwidth==0.2.6
 webcolors==1.13
 webencodings==0.5.1
