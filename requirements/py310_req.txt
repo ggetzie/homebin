@@ -23,7 +23,7 @@ Django==4.1.10
 entrypoints==0.3
 exceptiongroup==1.0.1
 executing==0.8.2
-fonttools==4.29.0
+fonttools==4.43.0
 idna==3.3
 iniconfig==1.1.1
 ipykernel==6.7.0
