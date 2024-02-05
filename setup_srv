@@ -4,12 +4,12 @@ import argparse
 import os
 import pathlib
 import socket
-import sys
 
 # Variables:
 # PROJECT_SLUG   - shorthand name for the project
 # PROJECT_USER   - the OS user for the project
 # PROJECT_PORT   - the port to host the gunicorn server at
+
 
 def port_is_open(port):
     s = socket.socket()
@@ -20,57 +20,62 @@ def port_is_open(port):
     else:
         return True
 
+
 def get_port(start, end):
     """
     Find the first open port between start and end
     """
     for port in range(start, end):
-        if not port_is_open(port): return port
+        if not port_is_open(port):
+            return port
     return None
 
-def populate(text, context):
+
+def populate(text, t_context):
     res = text
-    for key, value in context.items():
+    for key, value in t_context.items():
         res = res.replace(key, value)
     return res
 
+
 if __name__ == "__main__":
-    desc = ("Populate template files for server configuration")
-    parser = argparse.ArgumentParser(description=desc)
-    parser.add_argument('slug', help="Project Slug")
-    parser.add_argument('user', help="OS user for project")
-    parser.add_argument('port', help="Port for gunicorn")
+    DESC = "Populate template files for server configuration"
+    parser = argparse.ArgumentParser(description=DESC)
+    parser.add_argument("slug", help="Project Slug")
+    parser.add_argument("user", help="OS user for project")
+    parser.add_argument("port", help="Port for gunicorn")
 
     args = parser.parse_args()
     # port = get_port(8001, 9000)
     # if args.port:
     #     print(f"Lowest open port is {port}")
     #     sys.exit()
-    context = {"PROJECT_SLUG": args.slug,
-               "PROJECT_USER": args.user,
-               "PROJECT_PORT": args.port}
+    context = {
+        "PROJECT_SLUG": args.slug,
+        "PROJECT_USER": args.user,
+        "PROJECT_PORT": args.port,
+    }
     HOME_DIR = pathlib.Path(os.environ["HOME"])
     templates = HOME_DIR / "bin/templates"
     dest = pathlib.Path(f"/usr/local/src/{args.slug}/srv/local")
     dest.mkdir(exist_ok=True, parents=True)
-    with open(templates / "gunicorn_start.bash") as gunicorn_file:
+    with open(templates / "gunicorn_start.bash", encoding="utf-8") as gunicorn_file:
         gunicorn_text = gunicorn_file.read()
         gunicorn_start = populate(gunicorn_text, context)
-    
-    with open(templates / "nginx_PROJECT_SLUG.conf") as nginx_file:
+
+    with open(templates / "nginx_PROJECT_SLUG.conf", encoding="utf-8") as nginx_file:
         nginx_text = nginx_file.read()
         nginx = populate(nginx_text, context)
 
-    with open(templates / "super_PROJECT_SLUG.conf") as super_file:
+    with open(templates / "super_PROJECT_SLUG.conf", encoding="utf-8") as super_file:
         super_text = super_file.read()
         supervisor = populate(super_text, context)
 
-    with open(dest / "gunicorn_start.bash", "w") as gunicorn_out:
+    with open(dest / "gunicorn_start.bash", "w", encoding="utf-8") as gunicorn_out:
         gunicorn_out.write(gunicorn_start)
-    
-    with open(dest / f"nginx_{args.slug}.conf", "w") as nginx_out:
+
+    with open(dest / f"nginx_{args.slug}.conf", "w", encoding="utf-8") as nginx_out:
         nginx_out.write(nginx)
 
-    with open(dest / f"super_{args.slug}.conf", "w") as super_out:
+    with open(dest / f"super_{args.slug}.conf", "w", encoding="utf-8") as super_out:
         super_out.write(supervisor)
-    
