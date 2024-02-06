@@ -26,7 +26,7 @@ def parse_tr(tr):
     title_cell = tr.find_all("td")[2]
     title_a = title_cell.find("a")
     title = title_a.text.strip().replace("\n", " ")
-    title = re.sub(r"^subtitle ", "", title, flags=re.IGNORECASE)
+    title = re.sub(r"^subtitle\s+", "", title, flags=re.IGNORECASE)
     title_url = title_a["href"]
     return rating, lang, title, title_url
 
