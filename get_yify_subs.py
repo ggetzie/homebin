@@ -10,9 +10,13 @@ import requests
 
 
 def get_subtitle_list_url(url):
+    print(f"Getting subtitle list URL from {url}")
     yp = requests.get(url, timeout=10)
     yp_soup = BeautifulSoup(yp.text, "html.parser")
-    res = yp_soup.find_all("a", title=re.compile("Download Subtitles"))[0]["href"]
+    dl_button = yp_soup.find_all("a", title=re.compile("Download Subtitles"))
+    if not dl_button:
+        return None
+    res = dl_button[0]["href"]
     return res
 
 
@@ -32,10 +36,13 @@ def parse_tr(tr):
 
 
 def get_subtitle_options(lp_url, lang="English"):
+    print(f"looking for {lang} subtitles at: ", lp_url)
     lp = requests.get(lp_url, timeout=10)
     lp_soup = BeautifulSoup(lp.text, "html.parser")
     trs = lp_soup.find_all("tr")
     res = []
+    # Extract rating, language, title, and URL from each row
+    # and store them in a list of tuples if the language matches
     for tr in trs:
         parsed = parse_tr(tr)
         if parsed and parsed[1].lower() == lang.lower():
@@ -60,6 +67,7 @@ def get_absolute_url(sub_url, relative_url):
 
 
 def get_zip_url(sub_detail_url):
+    print(f"getting subtitle zip file URL from: {sub_detail_url}")
     sd = requests.get(sub_detail_url, timeout=10)
     sd_soup = BeautifulSoup(sd.text, "html.parser")
     links = sd_soup.find_all("a", href=re.compile(r"\.zip$"))
@@ -74,6 +82,9 @@ if __name__ == "__main__":
     parser.add_argument("url", help="URL of the movie")
     args = parser.parse_args()
     sub_url = get_subtitle_list_url(args.url)
+    if not sub_url:
+        print(f"No subtitle download link found at {args.url}")
+        sys.exit(0)
     sub_options = get_subtitle_options(sub_url)
     if not sub_options:
         print(f"No subtitles found at {sub_url}")
