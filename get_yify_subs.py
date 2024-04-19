@@ -2,6 +2,7 @@
 import argparse
 import re
 import os
+import pathlib
 import sys
 from urllib.parse import urlparse
 
@@ -9,9 +10,33 @@ from bs4 import BeautifulSoup
 import requests
 
 
+def slugify(title):
+    slug = title.lower()
+    slug = re.sub(r"[^a-z0-9 ]+", "", slug)
+    slug = re.sub(r"\s+", "-", slug)
+    return slug
+
+
+def get_yts_url_from_directory():
+    p = pathlib.Path.cwd()
+    m = re.match(r"^[^(]+\(\d{4}\)", p.name)
+    if not m:
+        print(f"Can't find movie title in year in current directory name {p.name}")
+        sys.exit(1)
+    title = m.group(0)
+    slug = slugify(title)
+    return f"https://yts.mx/movies/{slug}"
+
+
 def get_subtitle_list_url(url):
     print(f"Getting subtitle list URL from {url}")
     yp = requests.get(url, timeout=10)
+    while yp.status_code != 200:
+        print(f"Bad url: {url} Status Code: {yp.status_code}")
+        url = input("Enter a the url of the movie or (Q) to quit: ")
+        if url.lower() == "q":
+            sys.exit(0)
+        yp = requests.get(url, timeout=10)
     yp_soup = BeautifulSoup(yp.text, "html.parser")
     dl_button = yp_soup.find_all("a", title=re.compile("Download Subtitles"))
     if not dl_button:
@@ -79,11 +104,10 @@ def get_zip_url(sub_detail_url):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Get YIFY subtitles")
-    parser.add_argument("url", help="URL of the movie")
-    args = parser.parse_args()
-    sub_url = get_subtitle_list_url(args.url)
+    url = get_yts_url_from_directory
+    sub_url = get_subtitle_list_url(url)
     if not sub_url:
-        print(f"No subtitle download link found at {args.url}")
+        print(f"No subtitle download link found at {url}")
         sys.exit(0)
     sub_options = get_subtitle_options(sub_url)
     if not sub_options:
