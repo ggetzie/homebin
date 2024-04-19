@@ -104,7 +104,7 @@ def get_zip_url(sub_detail_url):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Get YIFY subtitles")
-    url = get_yts_url_from_directory
+    url = get_yts_url_from_directory()
     sub_url = get_subtitle_list_url(url)
     if not sub_url:
         print(f"No subtitle download link found at {url}")
