@@ -1,0 +1,258 @@
+Afghanistan33 00 N, 65 00 E
+Akrotiri34 37 N, 32 58 E
+Albania41 00 N, 20 00 E
+Algeria28 00 N, 3 00 E
+American Samoa14 20 S, 170 00 W
+Andorra42 30 N, 1 30 E
+Angola12 30 S, 18 30 E
+Anguilla18 15 N, 63 10 W
+Antarctica90 00 S, 0 00 E
+Antigua and Barbuda17 03 N, 61 48 W
+Arctic Ocean90 00 N, 0 00 E
+Argentina34 00 S, 64 00 W
+Armenia40 00 N, 45 00 E
+Aruba12 30 N, 69 58 W
+Ashmore and Cartier Islands12 25 S, 123 20 Enote - Ashmore Reef - 12 14 S, 123 05 E; Cartier Islet - 12 32 S, 123 32 E
+Atlantic Ocean0 00 N, 25 00 W
+Australia27 00 S, 133 00 E
+Austria47 20 N, 13 20 E
+Azerbaijan40 30 N, 47 30 E
+Bahamas, The24 15 N, 76 00 W
+Bahrain26 00 N, 50 33 E
+Bangladesh24 00 N, 90 00 E
+Barbados13 10 N, 59 32 W
+Belarus53 00 N, 28 00 E
+Belgium50 50 N, 4 00 E
+Belize17 15 N, 88 45 W
+Benin9 30 N, 2 15 E
+Bermuda32 20 N, 64 45 W
+Bhutan27 30 N, 90 30 E
+Bolivia17 00 S, 65 00 W
+Bosnia and Herzegovina44 00 N, 18 00 E
+Botswana22 00 S, 24 00 E
+Bouvet Island54 26 S, 3 24 E
+Brazil10 00 S, 55 00 W
+British Indian Ocean Territory6 00 S, 71 30 E;note - Diego Garcia 7 20 S, 72 25 E
+British Virgin Islands18 30 N, 64 30 W
+Brunei4 30 N, 114 40 E
+Bulgaria43 00 N, 25 00 E
+Burkina Faso13 00 N, 2 00 W
+Burma22 00 N, 98 00 E
+Burundi3 30 S, 30 00 E
+Cabo Verde16 00 N, 24 00 W
+Cambodia13 00 N, 105 00 E
+Cameroon6 00 N, 12 00 E
+Canada60 00 N, 95 00 W
+Cayman Islands19 30 N, 80 30 W
+Central African Republic7 00 N, 21 00 E
+Chad15 00 N, 19 00 E
+Chile30 00 S, 71 00 W
+China35 00 N, 105 00 E
+Christmas Island10 30 S, 105 40 E
+Clipperton Island10 17 N, 109 13 W
+Cocos (Keeling) Islands12 30 S, 96 50 E
+Colombia4 00 N, 72 00 W
+Comoros12 10 S, 44 15 E
+Congo, Democratic Republic of the0 00 N, 25 00 E
+Congo, Republic of the1 00 S, 15 00 E
+Cook Islands21 14 S, 159 46 W
+Coral Sea Islands18 00 S, 152 00 E
+Costa Rica10 00 N, 84 00 W
+Cote d'Ivoire8 00 N, 5 00 W
+Croatia45 10 N, 15 30 E
+Cuba21 30 N, 80 00 W
+Curacao12 10 N, 69 00 W
+Cyprus35 00 N, 33 00 E
+Czechia49 45 N, 15 30 E
+Denmark56 00 N, 10 00 E
+Dhekelia34 59 N, 33 45 E
+Djibouti11 30 N, 43 00 E
+Dominica15 25 N, 61 20 W
+Dominican Republic19 00 N, 70 40 W
+Ecuador2 00 S, 77 30 W
+Egypt27 00 N, 30 00 E
+El Salvador13 50 N, 88 55 W
+Equatorial Guinea2 00 N, 10 00 E
+Eritrea15 00 N, 39 00 E
+Estonia59 00 N, 26 00 E
+Eswatini26 30 S, 31 30 E
+Ethiopia8 00 N, 38 00 E
+Falkland Islands (Islas Malvinas)51 45 S, 59 00 W
+Faroe Islands62 00 N, 7 00 W
+Fiji18 00 S, 175 00 E
+Finland64 00 N, 26 00 E
+Francemetropolitan France: 46 00 N, 2 00 E; French Guiana: 4 00 N, 53 00 W; Guadeloupe: 16 15 N, 61 35 W; Martinique: 14 40 N, 61 00 W; Mayotte: 12 50 S, 45 10 E; Reunion: 21 06 S, 55 36 E
+French Polynesia15 00 S, 140 00 W
+French Southern and Antarctic LandsIle Amsterdam (Ile Amsterdam et Ile Saint-Paul): 37 50 S, 77 32 E; Ile Saint-Paul (Ile Amsterdam et Ile Saint-Paul): 38 72 S, 77 53 E; Iles Crozet: 46 25 S, 51 00 E; Iles Kerguelen: 49 15 S, 69 35 E; Bassas da India (Iles Eparses): 21 30 S, 39 50 E; Europa Island (Iles Eparses): 22 20 S, 40 22 E; Glorioso Islands (Iles Eparses): 11 30 S, 47 20 E; Juan de Nova Island (Iles Eparses): 17 03 S, 42 45 E; Tromelin Island (Iles Eparses): 15 52 S, 54 25 E
+Gabon1 00 S, 11 45 E
+Gambia, The13 28 N, 16 34 W
+Gaza Strip31 25 N, 34 20 E
+Georgia42 00 N, 43 30 E
+Germany51 00 N, 9 00 E
+Ghana8 00 N, 2 00 W
+Gibraltar36 08 N, 5 21 W
+Greece39 00 N, 22 00 E
+Greenland72 00 N, 40 00 W
+Grenada12 07 N, 61 40 W
+Guam13 28 N, 144 47 E
+Guatemala15 30 N, 90 15 W
+Guernsey49 28 N, 2 35 W
+Guinea11 00 N, 10 00 W
+Guinea-Bissau12 00 N, 15 00 W
+Guyana5 00 N, 59 00 W
+Haiti19 00 N, 72 25 W
+Heard Island and McDonald Islands53 06 S, 72 31 E
+Holy See (Vatican City)41 54 N, 12 27 E
+Honduras15 00 N, 86 30 W
+Hong Kong22 15 N, 114 10 E
+Hungary47 00 N, 20 00 E
+Iceland65 00 N, 18 00 W
+India20 00 N, 77 00 E
+Indian Ocean20 00 S, 80 00 E
+Indonesia5 00 S, 120 00 E
+Iran32 00 N, 53 00 E
+Iraq33 00 N, 44 00 E
+Ireland53 00 N, 8 00 W
+Isle of Man54 15 N, 4 30 W
+Israel31 30 N, 34 45 E
+Italy42 50 N, 12 50 E
+Jamaica18 15 N, 77 30 W
+Jan Mayen71 00 N, 8 00 W
+Japan36 00 N, 138 00 E
+Jersey49 15 N, 2 10 W
+Jordan31 00 N, 36 00 E
+Kazakhstan48 00 N, 68 00 E
+Kenya1 00 N, 38 00 E
+Kiribati1 25 N, 173 00 E
+Korea, North40 00 N, 127 00 E
+Korea, South37 00 N, 127 30 E
+Kosovo42 35 N, 21 00 E
+Kuwait29 30 N, 45 45 E
+Kyrgyzstan41 00 N, 75 00 E
+Laos18 00 N, 105 00 E
+Latvia57 00 N, 25 00 E
+Lebanon33 50 N, 35 50 E
+Lesotho29 30 S, 28 30 E
+Liberia6 30 N, 9 30 W
+Libya25 00 N, 17 00 E
+Liechtenstein47 16 N, 9 32 E
+Lithuania56 00 N, 24 00 E
+Luxembourg49 45 N, 6 10 E
+Macau22 10 N, 113 33 E
+Madagascar20 00 S, 47 00 E
+Malawi13 30 S, 34 00 E
+Malaysia2 30 N, 112 30 E
+Maldives3 15 N, 73 00 E
+Mali17 00 N, 4 00 W
+Malta35 50 N, 14 35 E
+Marshall Islands9 00 N, 168 00 E
+Mauritania20 00 N, 12 00 W
+Mauritius20 17 S, 57 33 E
+Mexico23 00 N, 102 00 W
+Micronesia, Federated States of6 55 N, 158 15 E
+Moldova47 00 N, 29 00 E
+Monaco43 44 N, 7 24 E
+Mongolia46 00 N, 105 00 E
+Montenegro42 30 N, 19 18 E
+Montserrat16 45 N, 62 12 W
+Morocco28 30 N, 10 00 W
+Mozambique18 15 S, 35 00 E
+Namibia22 00 S, 17 00 E
+Nauru0 32 S, 166 55 E
+Navassa Island18 25 N, 75 02 W
+Nepal28 00 N, 84 00 E
+Netherlands52 31 N, 5 46 E
+New Caledonia21 30 S, 165 30 E
+New Zealand41 00 S, 174 00 E
+Nicaragua13 00 N, 85 00 W
+Niger16 00 N, 8 00 E
+Nigeria10 00 N, 8 00 E
+Niue19 02 S, 169 52 W
+Norfolk Island29 02 S, 167 57 E
+North Macedonia41 50 N, 22 00 E
+Northern Mariana Islands15 12 N, 145 45 E
+Norway62 00 N, 10 00 E
+Oman21 00 N, 57 00 E
+Pacific Ocean0 00 N, 160 00 W
+Pakistan30 00 N, 70 00 E
+Palau7 30 N, 134 30 E
+Panama9 00 N, 80 00 W
+Papua New Guinea6 00 S, 147 00 E
+Paracel Islands16 30 N, 112 00 E
+Paraguay23 00 S, 58 00 W
+Peru10 00 S, 76 00 W
+Philippines13 00 N, 122 00 E
+Pitcairn Islands25 04 S, 130 06 W
+Poland52 00 N, 20 00 E
+Portugal39 30 N, 8 00 W
+Puerto Rico18 15 N, 66 30 W
+Qatar25 30 N, 51 15 E
+Romania46 00 N, 25 00 E
+Russia60 00 N, 100 00 E
+Rwanda2 00 S, 30 00 E
+Saint Barthelemy17 90 N, 62 85 W
+Saint Helena, Ascension, and Tristan da CunhaSaint Helena: 15 57 S, 5 42 W; Ascension Island: 7 57 S, 14 22 W; Tristan da Cunha island group: 37 15 S, 12 30 W
+Saint Kitts and Nevis17 20 N, 62 45 W
+Saint Lucia13 53 N, 60 58 W
+Saint Martin18 05 N, 63 57 W
+Saint Pierre and Miquelon46 50 N, 56 20 W
+Saint Vincent and the Grenadines13 15 N, 61 12 W
+Samoa13 35 S, 172 20 W
+San Marino43 46 N, 12 25 E
+Sao Tome and Principe1 00 N, 7 00 E
+Saudi Arabia25 00 N, 45 00 E
+Senegal14 00 N, 14 00 W
+Serbia44 00 N, 21 00 E
+Seychelles4 35 S, 55 40 E
+Sierra Leone8 30 N, 11 30 W
+Singapore1 22 N, 103 48 E
+Sint Maarten18 4 N, 63 4 W
+Slovakia48 40 N, 19 30 E
+Slovenia46 07 N, 14 49 E
+Solomon Islands8 00 S, 159 00 E
+Somalia10 00 N, 49 00 E
+South Africa29 00 S, 24 00 E
+South Georgia and South Sandwich Islands54 30 S, 37 00 W
+South Sudan8 00 N, 30 00 E
+Southern Ocean60 00 S, 90 00 E (nominally), but the Southern Ocean has the unique distinction of being a large circumpolar body of water totally encircling the continent of Antarctica; this ring of water lies between 60 degrees south latitude and the coast of Antarctica and encompasses 360 degrees of longitude
+Spain40 00 N, 4 00 W
+Spratly Islands8 38 N, 111 55 E
+Sri Lanka7 00 N, 81 00 E
+Sudan15 00 N, 30 00 E
+Suriname4 00 N, 56 00 W
+Svalbard78 00 N, 20 00 E
+Sweden62 00 N, 15 00 E
+Switzerland47 00 N, 8 00 E
+Syria35 00 N, 38 00 E
+Taiwan23 30 N, 121 00 E
+Tajikistan39 00 N, 71 00 E
+Tanzania6 00 S, 35 00 E
+Thailand15 00 N, 100 00 E
+Timor-Leste8 50 S, 125 55 E
+Togo8 00 N, 1 10 E
+Tokelau9 00 S, 172 00 W
+Tonga20 00 S, 175 00 W
+Trinidad and Tobago11 00 N, 61 00 W
+Tunisia34 00 N, 9 00 E
+Turkey (Turkiye)39 00 N, 35 00 E
+Turkmenistan40 00 N, 60 00 E
+Turks and Caicos Islands21 45 N, 71 35 W
+Tuvalu8 00 S, 178 00 E
+Uganda1 00 N, 32 00 E
+Ukraine49 00 N, 32 00 E
+United Arab Emirates24 00 N, 54 00 E
+United Kingdom54 00 N, 2 00 W
+United States38 00 N, 97 00 W
+United States Pacific Island Wildlife RefugesBaker Island: 0 13 N, 176 28 W; Howland Island: 0 48 N, 176 38 W; Jarvis Island: 0 23 S, 160 01 W; Johnston Atoll: 16 45 N, 169 31 W; Kingman Reef: 6 23 N, 162 25 W; Midway Islands: 28 12 N, 177 22 W; Palmyra Atoll: 5 53 N, 162 05 W
+Uruguay33 00 S, 56 00 W
+Uzbekistan41 00 N, 64 00 E
+Vanuatu16 00 S, 167 00 E
+Venezuela8 00 N, 66 00 W
+Vietnam16 10 N, 107 50 E
+Virgin Islands18 20 N, 64 50 W
+Wake Island19 17 N, 166 39 E
+Wallis and Futuna13 18 S, 176 12 W
+West Bank32 00 N, 35 15 E
+Yemen15 00 N, 48 00 E
+Zambia15 00 S, 30 00 E
+Zimbabwe20 00 S, 30 00 E
