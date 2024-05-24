@@ -3,32 +3,35 @@
 import argparse
 import random
 
-LEET = {'A': ["4", "@"],
-        'B': ["|3", "8", "|o"],
-        'C': ["(", "<", "K", "S"],
-        'D': ["|)", "o|", "|>", "<|"],
-        'E': ["3"],
-        'F': ["|=", "ph"],
-        'G': ["(", "9", "6"],
-        'H': ["|-|", "]-[", "}-{", "(-)", ")-(", "#"],
-        'I': ["l", "1", "|", "!", "]["],
-        'J': ["_|"],
-        'K': ["|<", "/<", "|{"],
-        'L': ["|_", "|", "1"],
-        'O': ["0", "()", "[]", "{}"],
-        'P': ["|2", "|D"],
-        'Q': ["(,)", "kw"],
-        'R': ["|2", "|Z", "|?"],
-        'S': ["5", "$"],
-        'T': ["+", "][", "7"],
-        'U': ["|_|"],
-        'V': ["|/", "/"],
-        'W': ["|/|/", "//"],
-        'X': ["><", "}{"],
-        'Y': ["j"],
-        'Z': ["2"]}
+LEET = {
+    "A": ["4", "@"],
+    "B": ["|3", "8", "|o"],
+    "C": ["(", "<", "K", "S"],
+    "D": ["|)", "o|", "|>", "<|"],
+    "E": ["3"],
+    "F": ["|=", "ph"],
+    "G": ["(", "9", "6"],
+    "H": ["|-|", "]-[", "}-{", "(-)", ")-(", "#"],
+    "I": ["l", "1", "|", "!", "]["],
+    "J": ["_|"],
+    "K": ["|<", "/<", "|{"],
+    "L": ["|_", "|", "1"],
+    "O": ["0", "()", "[]", "{}"],
+    "P": ["|2", "|D"],
+    "Q": ["(,)", "kw"],
+    "R": ["|2", "|Z", "|?"],
+    "S": ["5", "$"],
+    "T": ["+", "][", "7"],
+    "U": ["|_|"],
+    "V": ["|/", "/"],
+    "W": ["|/|/", "//"],
+    "X": ["><", "}{"],
+    "Y": ["j"],
+    "Z": ["2"],
+}
 
-def subleet(char, prob=0.15):
+
+def substitute_leet(char, prob=0.15):
     """
     substitute char with leet speak equivalent
     with probability prob
@@ -38,33 +41,42 @@ def subleet(char, prob=0.15):
     else:
         return char
 
-def get_words(dictfile):
-    with open(dictfile) as f:
+
+def get_words(dictionary):
+    with open(dictionary, encoding="utf-8") as f:
         # ignore words with apostrophes
         words = [w.strip() for w in f.readlines() if not "'" in w]
     return words
 
+
 def make_phrase(count, words, leet=True):
-    phrase = ''.join([random.SystemRandom().choice(words)
-                      for _ in range(count)])
+    phrase = "".join([random.SystemRandom().choice(words) for _ in range(count)])
     if leet:
-        phrase = ''.join([subleet(c) for c in phrase])
+        phrase = "".join([substitute_leet(c) for c in phrase])
     return phrase
 
+
 if __name__ == "__main__":
-    desc = ("Generate a random phrase using system random "
-            "and a local dictionary file")
-    parser = argparse.ArgumentParser(description=desc)
-    parser.add_argument('words', metavar="W", type=int, nargs='?',
-                        default=4,
-                        help="Number of words - default 4")
-    parser.add_argument('--leet', action='store_true',
-                        help=("Randomly substitute characters "
-                              "with 'leetspeak' equivalent"))
-    parser.add_argument('--dictionary', 
-                        default='/usr/share/dict/american-english',
-                        help=("dictionary file to use "
-                              "default - /usr/share/dict/american-english"))
+    DESC = "Generate a random phrase using system random and a local dictionary file"
+    parser = argparse.ArgumentParser(description=DESC)
+    parser.add_argument(
+        "words",
+        metavar="W",
+        type=int,
+        nargs="?",
+        default=4,
+        help="Number of words - default 4",
+    )
+    parser.add_argument(
+        "--leet",
+        action="store_true",
+        help=("Randomly substitute characters " "with 'leetspeak' equivalent"),
+    )
+    parser.add_argument(
+        "--dictionary",
+        default="/usr/share/dict/american-english",
+        help=("dictionary file to use " "default - /usr/share/dict/american-english"),
+    )
 
     args = parser.parse_args()
     print(make_phrase(args.words, get_words(args.dictionary), leet=args.leet))
