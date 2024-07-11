@@ -1,0 +1,40 @@
+body {
+  margin: 40px auto;
+  max-width: 700px;
+  line-height: 1.6;
+  font-size: 18px;
+  color: #444;
+  padding: 0;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+img {
+  max-height: 600px;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.calc {
+  max-width: fit-content;
+}
+
+button {
+  max-width: fit-content;
+  margin-top: 1em;
+}
+
+input {
+  width: 100%;
+  max-width: 100%;
+}

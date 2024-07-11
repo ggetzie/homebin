@@ -133,3 +133,4 @@ media/
 logs/
 run/
 .vscode/
+*.zip

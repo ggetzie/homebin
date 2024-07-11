@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie-{% endifchanged %}" />
+    <meta name="viewport" content="width=device-width, intial-scale=1.0" />
+    <meta
+      name="description"
+      content="A lightweight, self contained HTML template"
+    />
+    <meta name="author" content="Your Name Here" />
+    <meta name="keywords" content="some keywords to describe the page" />
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+
+    <title>Add the title of the website here</title>
+  </head>
+  <body>
+    <h1>This is a basic web page</h1>
+    <p>
+      Here is an introductory paragraph. You can add some text here to describe
+      the page.
+    </p>
+    <h2>A subsection</h2>
+    <p>This is a subsection at the h2 level</p>
+    <h2>Some Javascript</h2>
+    <p>
+      This is a basic example to show some javascript. Enter two numbers in the
+      boxes below and click "Add" to add them together.
+    </p>
+    <div class="column calc">
+      <label for="num1">Number 1:</label>
+      <input type="number" id="num1" />
+      <label for="num2">Number 2:</label>
+      <input type="number" id="num2" />
+      <div class="row">
+        <button onclick="reset()">Reset</button>
+        <button onclick="add()">Add</button>
+      </div>
+    </div>
+    <h2>Result</h2>
+    <p id="result"></p>
+    <script type="text/javascript" src="project.js"></script>
+  </body>
+</html>
