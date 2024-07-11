@@ -15,7 +15,7 @@ binaryornot==0.4.4
 black==22.10.0
 bleach==5.0.1
 bs4==0.0.1
-certifi==2022.9.24
+certifi==2024.7.4
 cffi==1.15.1
 chardet==5.1.0
 charset-normalizer==2.1.1
