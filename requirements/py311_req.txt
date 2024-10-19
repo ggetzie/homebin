@@ -26,7 +26,7 @@ cycler==0.11.0
 debugpy==1.6.3
 decorator==5.1.1
 defusedxml==0.7.1
-Django==4.2.13
+Django==5.1.2
 docutils==0.19
 entrypoints==0.4
 executing==1.2.0
@@ -83,7 +83,7 @@ parso==0.8.3
 pathspec==0.10.1
 pexpect==4.8.0
 pickleshare==0.7.5
-pillow==10.3.0
+pillow==11.0.0
 platformdirs==2.5.2
 prometheus-client==0.15.0
 prompt-toolkit==3.0.32
