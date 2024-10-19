@@ -15,7 +15,7 @@ binaryornot==0.4.4
 black==22.10.0
 bleach==5.0.1
 bs4==0.0.1
-certifi==2024.7.4
+certifi==2022.9.24
 cffi==1.15.1
 chardet==5.1.0
 charset-normalizer==2.1.1
@@ -26,7 +26,7 @@ cycler==0.11.0
 debugpy==1.6.3
 decorator==5.1.1
 defusedxml==0.7.1
-Django==4.2.14
+Django==4.2.13
 docutils==0.19
 entrypoints==0.4
 executing==1.2.0
@@ -127,7 +127,7 @@ types-html5lib==1.1.11.15
 typing_extensions==4.7.1
 tzdata==2023.3
 uri-template==1.3.0
-urllib3==1.26.19
+urllib3==1.26.18
 wcwidth==0.2.6
 webcolors==1.13
 webencodings==0.5.1
