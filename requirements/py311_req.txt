@@ -55,7 +55,7 @@ jupyter_server==2.13.0
 jupyter_server_fileid==0.9.2
 jupyter_server_terminals==0.4.4
 jupyter_server_ydoc==0.8.0
-jupyterlab==3.6.7
+jupyterlab==3.6.8
 jupyterlab-pygments==0.2.2
 jupyterlab_server==2.27.2
 kiwisolver==1.4.4
