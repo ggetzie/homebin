@@ -1,5 +1,4 @@
 #! /usr/bin/env bash
-
 for arg in "$@"
 do
     case $arg in
@@ -24,16 +23,26 @@ echo "that all values are bash safe or single-quoted"
 
 source /usr/local/src/${SLUG}/.env
 
-# DB_USER=${1:?"You must supply the username for the new database user"}
-# DB_NAME=${2:?"You must supply the name for the new database"}
-# DB_PW=${3:?"You must supply the password for the new user (use environment variable)"}
-
-echo "About to create new database ${DB_NAME} owned by user ${DB_USER} with password ${DB_PW}"
+echo "About to create new database ${DB_NAME} and user ${DB_USER} with password ${DB_PW}"
 read -p 'Proceed? Y[N]: ' CONFIRM
 if [ "$CONFIRM" = "y" ] || [ "$CONFIRM" = "Y" ]
 then
     psql postgres -c "CREATE ROLE ${DB_USER} WITH LOGIN PASSWORD '${DB_PW}';"
-    psql postgres -c "CREATE DATABASE ${DB_NAME} OWNER ${DB_USER};"
+    psql postgres -c "CREATE DATABASE ${DB_NAME};"
+    psql ${DB_NAME} -c "GRANT CREATE, CONNECT, TEMPORARY ON DATABASE ${DB_NAME} TO ${DB_USER};"
+    psql ${DB_NAME} -c "GRANT USAGE, CREATE ON SCHEMA public TO ${DB_USER};"
+    psql ${DB_NAME} -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT, INSERT, UPDATE, DELETE ON TABLES TO ${DB_USER};"
+    psql ${DB_NAME} -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT USAGE, SELECT ON SEQUENCES TO ${DB_USER};"
+    psql ${DB_NAME} -c "ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT EXECUTE ON FUNCTIONS TO ${DB_USER};"
+    # check if the DATABASE_URL variable is already in the .env file and if not, add it
+    if grep -q DATABASE_URL /usr/local/src/${SLUG}/.env
+    then
+        echo "DATABASE_URL already exists in /usr/local/src/${SLUG}/.env"
+    else
+        echo "DATABASE_URL=postgresql://${DB_USER}:${DB_PW}@localhost:5432/${DB_NAME}" >> /usr/local/src/${SLUG}/.env
+        echo "DATABASE_URL added to /usr/local/src/${SLUG}/.env"
+    fi
+    echo "Database ${DB_NAME} created successfully"
 else
     echo "Never mind then."
 fi
