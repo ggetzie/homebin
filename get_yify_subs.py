@@ -10,30 +10,30 @@ from bs4 import BeautifulSoup
 import requests
 
 
-def slugify(title):
+def slugify(title: str) -> str:
     slug = title.lower()
     slug = re.sub(r"[^a-z0-9 -]+", "", slug)
     slug = re.sub(r"\s+", "-", slug)
     return slug
 
 
-def get_yts_url_from_directory():
+def get_yts_url_from_directory() -> str:
     p = pathlib.Path.cwd()
     m = re.match(r"^[^(]+\(\d{4}\)", p.name)
     if not m:
-        print(f"Can't find movie title in year in current directory name {p.name}")
+        print(f"Can't find movie title and year in current directory name {p.name}")
         sys.exit(1)
     title = m.group(0)
     slug = slugify(title)
     return f"https://yts.mx/movies/{slug}"
 
 
-def get_subtitle_list_url(url):
+def get_subtitle_list_url(url: str) -> str:
     print(f"Getting subtitle list URL from {url}")
     yp = requests.get(url, timeout=10)
     while yp.status_code != 200:
         print(f"Bad url: {url} Status Code: {yp.status_code}")
-        url = input("Enter a the url of the movie or (Q) to quit: ")
+        url = input("Enter the url of the movie or (Q) to quit: ")
         if url.lower() == "q":
             sys.exit(0)
         yp = requests.get(url, timeout=10)
