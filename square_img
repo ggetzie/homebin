@@ -1,0 +1,9 @@
+#! /usr/bin/env bash
+
+# This script takes two arguments:
+# 1. The input image file
+# 2. The output image file
+# The script will crop the input image to a square of the shortest dimension 
+# and save it as the output image.
+
+magick $1 -gravity center -crop "%[fx:h>w?w:h]x%[fx:h>w?w:h]+0+0" $2
