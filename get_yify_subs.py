@@ -9,6 +9,8 @@ from urllib.parse import urlparse
 from bs4 import BeautifulSoup
 import requests
 
+YTS_HOST = "https://yts.lt"
+
 
 def slugify(title: str) -> str:
     slug = title.lower()
@@ -25,7 +27,7 @@ def get_yts_url_from_directory() -> str:
         sys.exit(1)
     title = m.group(0)
     slug = slugify(title)
-    return f"https://yts.mx/movies/{slug}"
+    return f"{YTS_HOST}/movies/{slug}"
 
 
 def get_subtitle_list_url(url: str) -> str:
