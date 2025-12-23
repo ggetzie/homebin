@@ -1,4 +1,13 @@
-#! /usr/bin/env python
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#    "beautifulsoup4>=4.12.0.6, <5",
+#    "requests>=2.31.0, <3",
+# ]
+# ///
+
 import argparse
 import re
 import os
@@ -106,10 +115,10 @@ def get_zip_url(sub_detail_url):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Get YIFY subtitles")
-    url = get_yts_url_from_directory()
-    sub_url = get_subtitle_list_url(url)
+    URL = get_yts_url_from_directory()
+    sub_url = get_subtitle_list_url(URL)
     if not sub_url:
-        print(f"No subtitle download link found at {url}")
+        print(f"No subtitle download link found at {URL}")
         sys.exit(0)
     sub_options = get_subtitle_options(sub_url)
     if not sub_options:
