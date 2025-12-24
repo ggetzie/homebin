@@ -1,10 +1,14 @@
-#!/usr/bin/env python
+#!/usr/bin/env -S uv run --script
+#
+# /// script
+# requires-python = ">=3.11"
+# ///
 import argparse
 from util import random_string, CHARSETS
 
 if __name__ == "__main__":
-    desc = "Generate a random string using system random"
-    parser = argparse.ArgumentParser(description=desc)
+    DESC = "Generate a random string using system random"
+    parser = argparse.ArgumentParser(description=DESC)
     parser.add_argument(
         "chars",
         metavar="N",
