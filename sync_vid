@@ -1,0 +1,7 @@
+#! /usr/bin/env bash
+
+rsync -av --no-group --no-owner --remove-source-files /var/lib/transmission-daemon/downloads/Movies/ /mnt/gabe/seagate26TB/Videos/Movies/
+find /var/lib/transmission-daemon/downloads/Movies/ -type d -mindepth 1 -empty -delete
+
+rsync -av --no-group --no-owner --remove-source-files /var/lib/transmission-daemon/downloads/TV\ Shows/ /mnt/gabe/seagate26TB/Videos/TV\ Shows/
+find /var/lib/transmission-daemon/downloads/TV\ Shows/ -type d -mindepth 1 -empty -delete
