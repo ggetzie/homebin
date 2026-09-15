@@ -1,7 +1,11 @@
-#!/usr/bin/env python
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.11"
+# ///
 
 import argparse
 import random
+import platform
 
 LEET = {
     "A": ["4", "@"],
@@ -30,6 +34,17 @@ LEET = {
     "Z": ["2"],
 }
 
+# DEFAULT_DICT = "/usr/share/dict/american-english"
+# on macOS use: /usr/share/dict/web2 on Linux use "/usr/share/dict/american-english"
+
+# check if running on macOS
+
+
+if platform.system() == "Darwin":
+    DEFAULT_DICT = "/usr/share/dict/web2"
+else:
+    DEFAULT_DICT = "/usr/share/dict/american-english"
+
 
 def substitute_leet(char, prob=0.15):
     """
@@ -49,8 +64,8 @@ def get_words(dictionary):
     return words
 
 
-def make_phrase(count, words, leet=True):
-    phrase = "".join([random.SystemRandom().choice(words) for _ in range(count)])
+def make_phrase(count, words, separator="-", leet=True):
+    phrase = separator.join([random.SystemRandom().choice(words) for _ in range(count)])
     if leet:
         phrase = "".join([substitute_leet(c) for c in phrase])
     return phrase
@@ -70,12 +85,17 @@ if __name__ == "__main__":
     parser.add_argument(
         "--leet",
         action="store_true",
-        help=("Randomly substitute characters " "with 'leetspeak' equivalent"),
+        help="Randomly substitute characters with 'leetspeak' equivalent",
     )
     parser.add_argument(
         "--dictionary",
-        default="/usr/share/dict/american-english",
-        help=("dictionary file to use " "default - /usr/share/dict/american-english"),
+        default=DEFAULT_DICT,
+        help=f"dictionary file to use default - {DEFAULT_DICT}",
+    )
+    parser.add_argument(
+        "--separator",
+        default="-",
+        help="separator to use between words - default '-'",
     )
 
     args = parser.parse_args()
